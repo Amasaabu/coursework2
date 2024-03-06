@@ -50,9 +50,8 @@ public:
 	int getBirthYear();
 
 
-	int doDebit(double);
-	int doCredit(double);
-	int calculate();
+	Transaction doDebitAccount(double);
+	int doCreditAccount(double);
 
 };
 

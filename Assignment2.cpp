@@ -4,7 +4,8 @@
 
 
 //to do
-// validate date of bith
+// start implementing transactions
+// validate user input string fields to ensure numbers are not part of user input
 // implement password validation
 // store transaction history
 // generate receipt for transaction
@@ -14,17 +15,17 @@
 #include <fstream>
 #include <string>
 #include "BankAccount.h"
+#include "Utility.h"
 using namespace  std;
 
 void registerAnAccountOperation();
 void getAccountDetailsOperation();
 
-void saveAccountToFile(BankAccount);
-BankAccount getAccountDetailsFromAccountNumber(string accountNumber);
-string generateRandom(string);
 
-//CONSTANT
-const string fileExtension = ".bin";
+
+//initialize utilities globallu
+
+
 int main()
 {
 	srand((unsigned)time(NULL));
@@ -68,19 +69,6 @@ int main()
 		}
 
 	} while (isValidInput);
-
-
-
-
-	
-	//BankAccount account2 = BankAccount();
-	//double amt = 300;
-	//string email = "ade@ade.com";
-	//account2.setAccountBalance(amt);
-	//account2.setAccountNumber("342313");
-	//account2.setEmail(email);
-	//saveAccountToFile(account2);
-
 }
 
 //Get account details operation
@@ -88,7 +76,7 @@ void getAccountDetailsOperation() {
 	string accountNumber="";
 	cout << "Input Account Number Below: " << endl;
 	cin >> accountNumber;
-	BankAccount accountDetails = getAccountDetailsFromAccountNumber(accountNumber);
+	BankAccount accountDetails = Utility::getAccountDetailsFromAccountNumber(accountNumber);
 	cout << "*******************" << endl;
 	cout << "Searching for Account Details..." << endl;
 	cout << "See Account Details Below" << endl;
@@ -100,6 +88,8 @@ void getAccountDetailsOperation() {
 	cout << "Date of birth: " << accountDetails.getBirthDate() << "/"<<accountDetails.getBirthMonth()<<"/"<<accountDetails.getBirthYear()<< endl;
 	cout << "Account Balance: " << accountDetails.getAccountBalance() << endl;
 	cout << "********** * ********" << endl;
+
+	return;
 
 
 }
@@ -132,14 +122,17 @@ void registerAnAccountOperation(){
 
 	cout << "Please input your birth year (e.g 2002): " << endl;
 	cin >> birthYear;
+	Utility::verifyUserInput();
 	bankAccount.setBirthYear(birthYear);
 
 	cout << "Please input your birth month (e.g 12 for December): " << endl;
 	cin >> birthMonth;
+	Utility::verifyUserInput();
 	bankAccount.setBirthMonth(birthMonth);
 
 	cout << "Please input your birth date: " << endl;
 	cin >> birthDate;
+	Utility::verifyUserInput();
 	bankAccount.setBirthDate(birthDate);
 
 	cout << "Please input your phone number" << endl;
@@ -147,9 +140,9 @@ void registerAnAccountOperation(){
 	bankAccount.setPhoneNumber(phoneNumber);
 
 	//generate account number
-	string accountNumber = generateRandom("ACC-");
+	string accountNumber = Utility::generateRandom("ACC-");
 	bankAccount.setAccountNumber(accountNumber);
-	saveAccountToFile(bankAccount);
+	Utility::saveAccountToFile(bankAccount);
 
 	//Display bank account details to customer
 	cout << "****Account Details***" << endl;
@@ -159,36 +152,9 @@ void registerAnAccountOperation(){
 }
 
 
-void saveAccountToFile(BankAccount bankAccount) {
-	ofstream file;
-	file.open(bankAccount.getAccountNumber()+ fileExtension);
-	if (file.is_open()) {
-		file.write((char*)&bankAccount, sizeof(bankAccount));
-		file.close();
-	}
-	else {
-		throw invalid_argument("Unable to create account");
-	}
-	cout << "Bank account created and Saved Successfully"<<endl;
-}
-
-BankAccount getAccountDetailsFromAccountNumber(string accountNumber) {
-	BankAccount account;
-	ifstream readFIle;
-	readFIle.open(accountNumber+fileExtension);
-	if (readFIle.is_open()) {
-		readFIle.read((char*)&account, sizeof(account));
-		readFIle.close();
-	}
-	else {
-		throw invalid_argument("Unable to get account details, ensure account number inputed is correct");
-	}
-	return account;
-}
 
 
-string generateRandom(string prefix) {
 
-	string random = to_string((rand()%1000000000000));
-	return (prefix + random);
-}
+
+
+
