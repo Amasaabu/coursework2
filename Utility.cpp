@@ -1,21 +1,22 @@
 #include "Utility.h"
 #include <iostream>
-#include "BankAccount.h"
+
 #include <fstream>
 #include <string>
 using namespace std;
 
 
 //CONSTANT
-const string fileExtension = ".bin";
+const string fileExtension = ".txt";
 string Utility::generateRandom(string prefix) {
 	string random = to_string((rand() % 1000000000000));
 	return (prefix + random);
 }
 
-void Utility::saveAccountToFile(BankAccount bankAccount) {
+
+void Utility::saveAccountToFilev1(BankAccount bankAccount) {
 	ofstream file;
-	file.open(bankAccount.getAccountNumber() + fileExtension, ios::binary);
+	file.open(to_string(bankAccount.getBirthDate()) + fileExtension);
 	if (file.is_open()) {
 		file.write((char*)&bankAccount, sizeof(bankAccount));
 		file.close();
@@ -25,20 +26,33 @@ void Utility::saveAccountToFile(BankAccount bankAccount) {
 	}
 	cout << "Bank account created and Saved Successfully" << endl;
 }
+//void Utility::saveAccountToFile(BankAccount bankAccount) {
+//	ofstream file;
+//	file.open(bankAccount.getAccountNumber() + fileExtension);
+//	if (file.is_open()) {
+//		file.write((char*)&bankAccount, sizeof(bankAccount));
+//		file.close();
+//	}
+//	else {
+//		throw invalid_argument("Unable to create account");
+//	}
+//	cout << "Bank account created and Saved Successfully" << endl;
+//}
 
 
 BankAccount Utility::getAccountDetailsFromAccountNumber(string accountNumber) {
-	BankAccount account;
-	ifstream readFIle;
-	readFIle.open(accountNumber + fileExtension, ios::binary);
-	if (readFIle.is_open()) {
-		readFIle.read((char*)&account, sizeof(account));
-		readFIle.close();
-	}
-	else {
-		throw runtime_error("Unable to get account details, ensure account number inputed is correct");
-	}
-	return account;
+			BankAccount acct;
+			ifstream readFIle;
+			readFIle.open(accountNumber + fileExtension, ios::binary);
+			if (readFIle.is_open()) {
+				readFIle.read((char*)&acct, sizeof(acct));
+				// readFIle.read((char*)&acct, sizeof(acct));
+				readFIle.close();
+			}
+			else {
+				throw runtime_error("Unable to get account details, ensure account number inputed is correct");
+			} 
+		return acct;
 }
 
 void Utility::verifyUserInput() {
