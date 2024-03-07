@@ -15,9 +15,10 @@ string Utility::generateRandom(string prefix) {
 
 void Utility::saveAccountToFile(BankAccount bankAccount) {
 	ofstream file;
-	file.open(bankAccount.getAccountNumber() + fileExtension, ios::binary);
+	file.open(bankAccount.getAccountNumber() + fileExtension);
 	if (file.is_open()) {
-		file.write((char*)&bankAccount, sizeof(bankAccount));
+		//file.write((char*)&bankAccount, sizeof(bankAccount));
+		bankAccount.serialize(file);
 		file.close();
 	}
 	else {
@@ -30,9 +31,10 @@ void Utility::saveAccountToFile(BankAccount bankAccount) {
 BankAccount Utility::getAccountDetailsFromAccountNumber(string accountNumber) {
 	BankAccount account;
 	ifstream readFIle;
-	readFIle.open(accountNumber + fileExtension, ios::binary);
+	readFIle.open(accountNumber + fileExtension);
 	if (readFIle.is_open()) {
-		readFIle.read((char*)&account, sizeof(account));
+		//readFIle.read((char*)&account, sizeof(account));
+		account.deserialize(readFIle);
 		readFIle.close();
 	}
 	else {

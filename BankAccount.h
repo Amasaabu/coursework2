@@ -6,18 +6,17 @@ using namespace std;
 class BankAccount
 {
 private:
-	int birthMonth;
-	int birthDate;
-	int birthYear;
+	int birthMonth=0;
+	int birthDate=0;
+	int birthYear=0;
 
-	string accountNumber;
-	string email;
-	string password;
-	string phoneNumber;
-	string surname;
-	string firstname;
-	double accountBalance;
-	Transaction transaction[];
+	string accountNumber="";
+	string email="";
+	string phoneNumber="";
+	string surname="";
+	string firstname="";
+	double accountBalance=0;
+	//Transaction transaction[];
 public:
 	BankAccount();
 	string getAccountNumber();
@@ -26,8 +25,6 @@ public:
 
 	void setEmail(string& email);
 	string getEmail();
-	void setPassword(string& password);
-	string getPasswprd();
 	void setPhoneNumber(string& phoneNumber);
 	string getPhoneNumber();
 
@@ -50,8 +47,20 @@ public:
 	int getBirthYear();
 
 
-	Transaction doDebitAccount(double);
-	int doCreditAccount(double);
+	void serialize(std::ostream& os) const {
+		// Serialize each member variable individually
+		os << accountNumber << " " << email << " "  << " "
+			<< phoneNumber << " " << surname << " " << firstname << " "
+			<< accountBalance << " " << birthMonth << " " << birthDate << " "
+			<< birthYear << "\n";
+	}
+
+	void deserialize(std::istream& is) {
+		// Deserialize each member variable individually
+		is >> accountNumber >> email  >> phoneNumber
+			>> surname >> firstname >> accountBalance >> birthMonth
+			>> birthDate >> birthYear;
+	}
 
 };
 

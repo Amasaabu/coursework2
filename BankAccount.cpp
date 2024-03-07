@@ -57,17 +57,9 @@ string BankAccount::getEmail()
 {
 	return  this->email;
 }
-void BankAccount::setPassword(string& password)
-{
-	this->password = password;
-}
-string BankAccount::getPasswprd()
-{
-	return  this->password;
-}
 void BankAccount::setPhoneNumber(string& phoneNumber)
 {
-	this->password = phoneNumber;
+	this->phoneNumber = phoneNumber;
 }
 string BankAccount::getPhoneNumber()
 {

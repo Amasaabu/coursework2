@@ -1,20 +1,5 @@
 ﻿  Assignment2.cpp
-C:\Users\Amasa\Desktop\Dundee\SoftwareDev\Assignment2\code\Assignment2\Assignment2\BankAccount.h(20,14): warning C4200: nonstandard extension used: zero-sized array in struct/union
-  (compiling source file 'Assignment2.cpp')
-  C:\Users\Amasa\Desktop\Dundee\SoftwareDev\Assignment2\code\Assignment2\Assignment2\BankAccount.h(20,14):
-  This member will be ignored by a defaulted constructor or copy/move assignment operator
-  
   BankAccount.cpp
-C:\Users\Amasa\Desktop\Dundee\SoftwareDev\Assignment2\code\Assignment2\Assignment2\BankAccount.h(20,14): warning C4200: nonstandard extension used: zero-sized array in struct/union
-  (compiling source file 'BankAccount.cpp')
-  C:\Users\Amasa\Desktop\Dundee\SoftwareDev\Assignment2\code\Assignment2\Assignment2\BankAccount.h(20,14):
-  This member will be ignored by a defaulted constructor or copy/move assignment operator
-  
   Utility.cpp
-C:\Users\Amasa\Desktop\Dundee\SoftwareDev\Assignment2\code\Assignment2\Assignment2\BankAccount.h(20,14): warning C4200: nonstandard extension used: zero-sized array in struct/union
-  (compiling source file 'Utility.cpp')
-  C:\Users\Amasa\Desktop\Dundee\SoftwareDev\Assignment2\code\Assignment2\Assignment2\BankAccount.h(20,14):
-  This member will be ignored by a defaulted constructor or copy/move assignment operator
-  
   Generating Code...
   Assignment2.vcxproj -> C:\Users\Amasa\Desktop\Dundee\SoftwareDev\Assignment2\code\Assignment2\x64\Debug\Assignment2.exe
