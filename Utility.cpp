@@ -16,35 +16,35 @@ string Utility::generateRandom(string prefix) {
 	return (prefix + random);
 }
 
-bool Utility::saveAccountToFile(BankAccount bankAccount) {
-	ofstream file;
-	file.open(bankAccount.getAccountNumber() + fileExtension);
-	if (file.is_open()) {
-		//file.write((char*)&bankAccount, sizeof(bankAccount));
-		bankAccount.serialize(file);
-		file.close();
-		return true;
-	}
-	else {
-		return false;
-	}
-}
+//bool Utility::saveAccountToFile(BankAccount bankAccount) {
+//	ofstream file;
+//	file.open(bankAccount.getAccountNumber() + fileExtension);
+//	if (file.is_open()) {
+//		//file.write((char*)&bankAccount, sizeof(bankAccount));
+//		bankAccount.serialize(file);
+//		file.close();
+//		return true;
+//	}
+//	else {
+//		return false;
+//	}
+//}
 
 
-BankAccount Utility::getAccountDetailsFromAccountNumber(string accountNumber) {
-	BankAccount account;
-	ifstream readFIle;
-	readFIle.open(accountNumber + fileExtension);
-	if (readFIle.is_open()) {
-		//readFIle.read((char*)&account, sizeof(account));
-		account.deserialize(readFIle);
-		readFIle.close();
-	}
-	else {
-		throw invalid_argument("Unable to get account details, ensure account number inputed is correct");
-	}
-	return account;
-}
+//BankAccount Utility::getAccountDetailsFromAccountNumber(string accountNumber) {
+//	BankAccount account;
+//	ifstream readFIle;
+//	readFIle.open(accountNumber + fileExtension);
+//	if (readFIle.is_open()) {
+//		//readFIle.read((char*)&account, sizeof(account));
+//		account.deserialize(readFIle);
+//		readFIle.close();
+//	}
+//	else {
+//		throw invalid_argument("Unable to get account details, ensure account number inputed is correct");
+//	}
+//	return account;
+//}
 
 void Utility::verifyUserInput() {
 	// check if there was an error reading the line or if there are any non-new line in the stream.
@@ -78,13 +78,19 @@ BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
 	ifstream file;
 	file.open(bankFile);
 	BankAccount temp;
+	BankAccount foundBankAccount;
 	if (file.is_open()) {
 		while (file>>temp) {
 			//check each item from the text file
 			if (acctNumber == temp.getAccountNumber()) {
+				foundBankAccount = temp;
 				break;
 			}
 		}
 	}
-	return temp;
+	//checking if no account was found
+	if (foundBankAccount.getAccountNumber() == "") {
+		throw invalid_argument("No account found, kindly try again, or create a new account");
+	}
+	return foundBankAccount;
 }

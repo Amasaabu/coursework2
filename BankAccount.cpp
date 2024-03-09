@@ -121,22 +121,3 @@ istream& operator>>(istream& input, BankAccount& acct) {
 	return input;
 }
 
-
-//transaction bankaccount::dodebitaccount(double amount) {
-//	//ensure amount is not greater than available balance
-//	double newamount = amount + this->accountbalance;
-//	if (newamount < 0) throw runtime_error("account balance can not be negative");
-//
-//	//create transaction object
-//	transaction txn;
-//	txn.setamount(amount);
-//	txn.settxnref();
-//	txn.settxntype("debit");
-//	txn.settxnref();
-//
-//	//push transaction object into 'transaction in ' account object
-//
-//	//change current account balance on bank account
-//	this->accountbalance = accountbalance;
-//	//return transaction
-//}

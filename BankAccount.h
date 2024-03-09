@@ -50,20 +50,20 @@ public:
 	void creditAccount(double);
 
 	friend istream& operator>>(istream& input, BankAccount& acct);
-	void serialize(std::ostream& os) const {
-		// Serialize each member variable individually
-		os << accountNumber << " " << email << " "  << " "
-			<< phoneNumber << " " << surname << " " << firstname << " "
-			<< accountBalance << " " << birthMonth << " " << birthDate << " "
-			<< birthYear << "\n";
-	}
+	//void serialize(std::ostream& os) const {
+	//	// Serialize each member variable individually
+	//	os << accountNumber << " " << email << " "  << " "
+	//		<< phoneNumber << " " << surname << " " << firstname << " "
+	//		<< accountBalance << " " << birthMonth << " " << birthDate << " "
+	//		<< birthYear << "\n";
+	//}
 
-	void deserialize(std::istream& is) {
-		// Deserialize each member variable individually
-		is >> accountNumber >> email  >> phoneNumber
-			>> surname >> firstname >> accountBalance >> birthMonth
-			>> birthDate >> birthYear;
-	}
+	//void deserialize(std::istream& is) {
+	//	// Deserialize each member variable individually
+	//	is >> accountNumber >> email  >> phoneNumber
+	//		>> surname >> firstname >> accountBalance >> birthMonth
+	//		>> birthDate >> birthYear;
+	//}
 
 };
 
