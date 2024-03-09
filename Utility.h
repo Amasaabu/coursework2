@@ -12,5 +12,8 @@ public:
 	static bool saveAccountToFile(BankAccount bankAccount);
 	static BankAccount getAccountDetailsFromAccountNumber(string accountNumber);
 	static void verifyUserInput();
+
+	static bool saveBankToArray(BankAccount acct);
+	static BankAccount getBankDetailsFromFile(string accountNumber);
 };
 

@@ -149,7 +149,7 @@ void getAccountDetailsOperation() {
 	string accountNumber="";
 	cout << "Input Account Number Below: " << endl;
 	cin >> accountNumber;
-	BankAccount accountDetails = Utility::getAccountDetailsFromAccountNumber(accountNumber);
+	BankAccount accountDetails = Utility::getBankDetailsFromFile(accountNumber);
 	cout << "*******************" << endl;
 	cout << "Searching for Account Details..." << endl;
 	cout << "Account Details: " << endl;
@@ -220,7 +220,7 @@ void registerAnAccountOperation(){
 	//generate account number
 	string accountNumber = Utility::generateRandom("ACC-");
 	bankAccount.setAccountNumber(accountNumber);
-	bool isOperationSuccessful = Utility::saveAccountToFile(bankAccount);
+	bool isOperationSuccessful = Utility::saveBankToArray(bankAccount);
 	if (!isOperationSuccessful) {
 		throw invalid_argument("Unable to create account");
 		return;

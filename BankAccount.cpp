@@ -114,6 +114,14 @@ void BankAccount::creditAccount(double amount) {
 	this->accountBalance = newBalance;
 }
 
+istream& operator>>(istream& input, BankAccount& acct) {
+	input >> acct.accountNumber >> acct.email >> acct.phoneNumber
+		>> acct.surname >> acct.firstname >> acct.accountBalance >> acct.birthMonth
+		>> acct.birthDate >> acct.birthYear;
+	return input;
+}
+
+
 //transaction bankaccount::dodebitaccount(double amount) {
 //	//ensure amount is not greater than available balance
 //	double newamount = amount + this->accountbalance;

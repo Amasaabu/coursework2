@@ -3,11 +3,14 @@
 #include "BankAccount.h"
 #include <fstream>
 #include <string>
+
+#include "vector";
 using namespace std;
 
 
 //CONSTANT
 const string fileExtension = ".bin";
+const string bankFile = "bank.txt";
 string Utility::generateRandom(string prefix) {
 	string random = to_string((rand() % 1000000000000));
 	return (prefix + random);
@@ -52,4 +55,34 @@ void Utility::verifyUserInput() {
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		throw std::invalid_argument("****Invalid input detected***** \nProgram Restarting....");
 	}
+}
+
+bool Utility::saveBankToArray(BankAccount acct) {
+	bool result = false;
+	ofstream file;
+	file.open(bankFile, ios::app);
+	if (file.is_open()) {
+		file << acct.getAccountNumber() << " " << acct.getEmail() << " " << " "
+			<< acct.getPhoneNumber() << " " << acct.getSurname() << " " << acct.getFirstName() << " "
+			<< acct.getAccountBalance() << " " << acct.getBirthDate() << " " << acct.getBirthMonth() << " "
+			<< acct.getBirthYear() << endl;
+		file.close();
+		return true;
+	}
+
+	return result;
+}
+
+
+BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
+	ifstream file;
+	file.open(bankFile);
+	std::vector <BankAccount> accounts;
+	BankAccount temp;
+	if (file.is_open()) {
+		while (file>>temp) {
+			accounts.push_back(temp);
+		}
+	}
+	return accounts[0];
 }

@@ -49,7 +49,7 @@ public:
 	bool debitAccount(double);
 	void creditAccount(double);
 
-
+	friend istream& operator>>(istream& input, BankAccount& acct);
 	void serialize(std::ostream& os) const {
 		// Serialize each member variable individually
 		os << accountNumber << " " << email << " "  << " "
@@ -66,4 +66,5 @@ public:
 	}
 
 };
+
 
