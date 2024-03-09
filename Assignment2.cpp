@@ -20,7 +20,8 @@ using namespace  std;
 
 void registerAnAccountOperation();
 void getAccountDetailsOperation();
-
+void addCashOperation();
+void withdrawCashOperation();
 
 
 //initialize utilities globallu
@@ -39,6 +40,7 @@ int main()
 		cout << "2. View Account Details" << endl;
 		cout << "3. Deposit Cash" << endl;
 		cout << "4. Withdraw Cash" << endl;
+		cout << "5. To exit the preogram" << endl;
 		cin >> firstInput;
 		cout << "*****************" << endl;
 		try
@@ -50,10 +52,21 @@ int main()
 			}
 			else if (firstInput == "2") {
 				getAccountDetailsOperation();
+				continue;
 			}
 			else if(firstInput == "3") {
-
-			} else {
+				addCashOperation();
+				continue;
+			}
+			else if (firstInput == "4") {
+				withdrawCashOperation();
+			}
+			else if(firstInput=="5") {
+				cout << "Safely exiting Program..."<<endl;
+				return 0;
+			}
+			
+			else {
 				cout << "An invalid input entered, please try again " << endl;
 				continue;
 			}
@@ -71,6 +84,66 @@ int main()
 	} while (isValidInput);
 }
 
+//withdraw cash operation
+void withdrawCashOperation() {
+	string accountNumber = "";
+	cout << "Please anter account Number below: " << endl;
+	cin >> accountNumber;
+	Utility::verifyUserInput();
+	//get Account Details
+	cout << "Searching for accouint..." << endl;
+	BankAccount account = Utility::getAccountDetailsFromAccountNumber(accountNumber);
+	cout << "Account Auth Succeeded!" << endl;
+	cout << "Kindly enter amount you wish to WIthdraw: " << endl;
+	double amount = 0;
+	cin >> amount;
+	Utility::verifyUserInput();
+	bool isSuccessful = account.debitAccount(amount);
+	isSuccessful = Utility::saveAccountToFile(account);
+	if (!isSuccessful) {
+		throw invalid_argument("Operation Failed");
+		return;
+	}
+	cout << "*****Request Processed****" << endl;
+	cout << "" << endl;
+	cout << "Account Number: " << account.getAccountNumber() << endl;
+	cout << "New Balance: " << account.getAccountBalance() << endl;
+	cout << "" << endl;
+	
+
+
+
+
+}
+
+
+//add cash details Operation
+void addCashOperation() {
+	string accountNumber = "";
+	cout << "Please anter account Number below: " << endl;
+	cin >> accountNumber;
+	Utility::verifyUserInput();
+	//get Account Details
+	cout << "Searching for accouont..."<<endl;
+	BankAccount account = Utility::getAccountDetailsFromAccountNumber(accountNumber);
+	cout << "Account Auth Succeeded!" << endl;
+	cout << "Kindly enter amount you wish to credit your account with below " << endl;
+	double amount = 0;
+	cin >> amount;
+	Utility::verifyUserInput();
+	account.creditAccount(amount);
+	bool isOperationSuccessful = Utility::saveAccountToFile(account);
+	if (!isOperationSuccessful) {
+		throw invalid_argument("Operation failed while Updating details!");
+		return;
+	}
+	cout << "*******Cash added*********" << endl;
+	cout << "Account Number: " << account.getAccountNumber() << endl;
+	cout << "New Balance: " << account.getAccountBalance() << endl;
+	cout << "****************" << endl;
+}
+
+
 //Get account details operation
 void getAccountDetailsOperation() {
 	string accountNumber="";
@@ -79,15 +152,20 @@ void getAccountDetailsOperation() {
 	BankAccount accountDetails = Utility::getAccountDetailsFromAccountNumber(accountNumber);
 	cout << "*******************" << endl;
 	cout << "Searching for Account Details..." << endl;
-	cout << "See Account Details Below" << endl;
-	cout << "********** * ********" << endl;
+	cout << "Account Details: " << endl;
+	cout << "" << endl;
 	cout << "Account Number: " << accountDetails.getAccountNumber() << endl;
+	cout << ".........................." << endl;
 	cout << "Surname: " << accountDetails.getSurname() << endl;
+	cout << ".........................." << endl;
 	cout << "FirsName: " << accountDetails.getFirstName() << endl;
+	cout << ".........................." << endl;
 	cout << "Email: " << accountDetails.getEmail() << endl;
+	cout << ".........................." << endl;
 	cout << "Date of birth: " << accountDetails.getBirthDate() << "/"<<accountDetails.getBirthMonth()<<"/"<<accountDetails.getBirthYear()<< endl;
+	cout << ".........................." << endl;
 	cout << "Account Balance: " << accountDetails.getAccountBalance() << endl;
-	cout << "********** * ********" << endl;
+	cout << "" << endl;
 
 	return;
 
@@ -142,8 +220,11 @@ void registerAnAccountOperation(){
 	//generate account number
 	string accountNumber = Utility::generateRandom("ACC-");
 	bankAccount.setAccountNumber(accountNumber);
-	Utility::saveAccountToFile(bankAccount);
-
+	bool isOperationSuccessful = Utility::saveAccountToFile(bankAccount);
+	if (!isOperationSuccessful) {
+		throw invalid_argument("Unable to create account");
+		return;
+	}
 	//Display bank account details to customer
 	cout << "****Account Details***" << endl;
 	cout << "1. Account Number: " << bankAccount.getAccountNumber() << endl;

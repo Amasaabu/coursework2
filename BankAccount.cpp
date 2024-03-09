@@ -96,6 +96,24 @@ double BankAccount::getAccountBalance()
 	return this->accountBalance;
 }
 
+bool BankAccount::debitAccount(double amount) {
+	bool result = false;
+	double temporaryNewBalance = this->accountBalance - amount;
+	if (temporaryNewBalance < 0)
+	{
+		throw  invalid_argument("Insufficient account balance to complete request");
+		return false;
+	}
+	this->accountBalance = temporaryNewBalance;
+	result = true;
+	return result;
+}
+
+void BankAccount::creditAccount(double amount) {
+	double newBalance = this->accountBalance + amount;
+	this->accountBalance = newBalance;
+}
+
 //transaction bankaccount::dodebitaccount(double amount) {
 //	//ensure amount is not greater than available balance
 //	double newamount = amount + this->accountbalance;

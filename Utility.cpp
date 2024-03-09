@@ -13,18 +13,18 @@ string Utility::generateRandom(string prefix) {
 	return (prefix + random);
 }
 
-void Utility::saveAccountToFile(BankAccount bankAccount) {
+bool Utility::saveAccountToFile(BankAccount bankAccount) {
 	ofstream file;
 	file.open(bankAccount.getAccountNumber() + fileExtension);
 	if (file.is_open()) {
 		//file.write((char*)&bankAccount, sizeof(bankAccount));
 		bankAccount.serialize(file);
 		file.close();
+		return true;
 	}
 	else {
-		throw invalid_argument("Unable to create account");
+		return false;
 	}
-	cout << "Bank account created and Saved Successfully" << endl;
 }
 
 
@@ -38,7 +38,7 @@ BankAccount Utility::getAccountDetailsFromAccountNumber(string accountNumber) {
 		readFIle.close();
 	}
 	else {
-		throw runtime_error("Unable to get account details, ensure account number inputed is correct");
+		throw invalid_argument("Unable to get account details, ensure account number inputed is correct");
 	}
 	return account;
 }
@@ -50,6 +50,6 @@ void Utility::verifyUserInput() {
 		cin.clear();
 		//clears the invalid input, size of input is max amount of stream and any new line in the stream.
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		throw std::invalid_argument("****Invalid number passed***** \n Program Restarting....");
+		throw std::invalid_argument("****Invalid input detected***** \nProgram Restarting....");
 	}
 }

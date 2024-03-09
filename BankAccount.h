@@ -16,7 +16,7 @@ private:
 	string surname="";
 	string firstname="";
 	double accountBalance=0;
-	//Transaction transaction[];
+//	Transaction transaction[];
 public:
 	BankAccount();
 	string getAccountNumber();
@@ -45,6 +45,9 @@ public:
 
 	void setBirthYear(int);
 	int getBirthYear();
+
+	bool debitAccount(double);
+	void creditAccount(double);
 
 
 	void serialize(std::ostream& os) const {
