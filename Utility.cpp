@@ -77,12 +77,14 @@ bool Utility::saveBankToArray(BankAccount acct) {
 BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
 	ifstream file;
 	file.open(bankFile);
-	std::vector <BankAccount> accounts;
 	BankAccount temp;
 	if (file.is_open()) {
 		while (file>>temp) {
-			accounts.push_back(temp);
+			//check each item from the text file
+			if (acctNumber == temp.getAccountNumber()) {
+				break;
+			}
 		}
 	}
-	return accounts[0];
+	return temp;
 }
