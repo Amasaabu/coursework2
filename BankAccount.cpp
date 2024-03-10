@@ -5,6 +5,10 @@
 //CONSTRUCTORS
 BankAccount::BankAccount() {
 	this->accountBalance = 0;
+	//this->email = "";
+	//this->phoneNumber = "";
+	//this->surname = "";
+	//this->firstname = "";
 }
 
 
@@ -57,17 +61,9 @@ string BankAccount::getEmail()
 {
 	return  this->email;
 }
-void BankAccount::setPassword(string& password)
-{
-	this->password = password;
-}
-string BankAccount::getPasswprd()
-{
-	return  this->password;
-}
 void BankAccount::setPhoneNumber(string& phoneNumber)
 {
-	this->password = phoneNumber;
+	this->phoneNumber = phoneNumber;
 }
 string BankAccount::getPhoneNumber()
 {
@@ -104,21 +100,51 @@ double BankAccount::getAccountBalance()
 	return this->accountBalance;
 }
 
-//transaction bankaccount::dodebitaccount(double amount) {
-//	//ensure amount is not greater than available balance
-//	double newamount = amount + this->accountbalance;
-//	if (newamount < 0) throw runtime_error("account balance can not be negative");
-//
-//	//create transaction object
-//	transaction txn;
-//	txn.setamount(amount);
-//	txn.settxnref();
-//	txn.settxntype("debit");
-//	txn.settxnref();
-//
-//	//push transaction object into 'transaction in ' account object
-//
-//	//change current account balance on bank account
-//	this->accountbalance = accountbalance;
-//	//return transaction
-//}
+bool BankAccount::debitAccount(double amount) {
+	bool result = false;
+	double temporaryNewBalance = this->accountBalance - amount;
+	if (temporaryNewBalance < 0)
+	{
+		throw  invalid_argument("Insufficient account balance to complete request");
+		return false;
+	}
+	this->accountBalance = temporaryNewBalance;
+	result = true;
+	return result;
+}
+
+
+void BankAccount::creditAccount(double amount) {
+	double newBalance = this->accountBalance + amount;
+	this->accountBalance = newBalance;
+}
+
+void BankAccount::setAccountType(string acctType)
+{
+	if (acctType == "SAVINGS" || acctType == "CURRENT") {
+		this->accountType = acctType;
+		return;
+	}
+	throw invalid_argument("Account Type Entered not recognized");
+}
+
+string BankAccount::getAccountType()
+{
+	return this->accountType;
+}
+
+istream& operator>>(istream& input, BankAccount& acct) {
+	input >> acct.accountNumber >> acct.email >> acct.phoneNumber
+		>> acct.surname >> acct.firstname >> acct.accountBalance >> acct.birthMonth
+		>> acct.birthDate >> acct.birthYear>>acct.accountType;
+	return input;
+}
+
+ofstream& operator<<(ofstream& output, BankAccount& acct) {
+	output << acct.accountNumber << " " << acct.email << " "
+		<< acct.phoneNumber << " " << acct.surname << " " << acct.firstname << " "
+		<< acct.accountBalance << " " << acct.birthDate << " " << acct.birthMonth << " "
+		<< acct.birthYear << " " << acct.accountType << endl;;
+	return output;
+}
+

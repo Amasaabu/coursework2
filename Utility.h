@@ -9,8 +9,11 @@ class Utility
 {
 public:
 	static string generateRandom(string prefix);
-	static void saveAccountToFile(BankAccount bankAccount);
-	static BankAccount getAccountDetailsFromAccountNumber(string accountNumber);
 	static void verifyUserInput();
+	static void addInterestToAllAccount();
+
+	static bool saveBankToFile(BankAccount acct);
+	static BankAccount getBankDetailsFromFile(string );
+	static void updateAccountInFile(BankAccount updatedAcct);
 };
 
