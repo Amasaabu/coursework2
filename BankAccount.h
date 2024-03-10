@@ -17,7 +17,7 @@ private:
 	string firstname="";
 	double accountBalance=0;
 
-	string accountType;
+	string accountType="SAVINGS";
 //	Transaction transaction[];
 public:
 	BankAccount();

@@ -66,7 +66,7 @@ BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
 }
 
 
-bool Utility::updateAccountInFile(BankAccount updatedAcct) {
+void Utility::updateAccountInFile(BankAccount updatedAcct) {
 	//account already available, we now try to update in file
 	string tempFile = "update.txt";
 	ifstream inFile;
@@ -74,9 +74,9 @@ bool Utility::updateAccountInFile(BankAccount updatedAcct) {
 	inFile.open(bankFile);
 	outfile.open(tempFile);
 	BankAccount temp;
-	bool resultOfOperation = false;
 	if (!inFile.is_open()) {
 		//IO exception
+		throw invalid_argument("Unable to open file");
 	}
 	while (inFile>>temp)
 		{
@@ -87,23 +87,24 @@ bool Utility::updateAccountInFile(BankAccount updatedAcct) {
 		else {
 			outfile << temp;
 		}
-			resultOfOperation = true;
 		}
 	inFile.close();
 	outfile.close();
 
-
 	const char tempFileChar[] = "update.txt";
 	const char bankFileChar[] = "bank.txt";
 	int result = remove(bankFileChar);
-	int resukt2=rename(tempFileChar, bankFileChar);
-	return resultOfOperation;
+	int result2=rename(tempFileChar, bankFileChar);
+	if (result != 0 && result2 != 0) {
+		throw invalid_argument("Unable to update amount");
+	}
+	return;
 }
 
 
 void Utility::addInterestToAllAccount()
 {
-	string tempFileName = "temp.txt";
+	string tempFileName = "update.txt";
 	//load all account
 	ifstream file;
 	ofstream outFile;
@@ -111,7 +112,10 @@ void Utility::addInterestToAllAccount()
 	outFile.open(tempFileName);
 	BankAccount temp;
 
-	if (file.is_open()&&outFile.is_open()) {
+	if (!file.is_open() || !outFile.is_open()) {
+		throw invalid_argument("Account could not be opened");
+	}
+
 		while (file >> temp) {
 			if (temp.getAccountType() == "SAVINGS") {
 				//interest rate for savings
@@ -127,11 +131,13 @@ void Utility::addInterestToAllAccount()
 				temp.setAccountBalance(newAmount);
 			}
 
-			outFile<<temp;
-			const char* tempChar = tempFileName.c_str();
-			const char* newNameChar = bankFile.c_str();
-			rename(tempChar, newNameChar);
-			
+			outFile<<temp;			
 		}
-	} 
+		outFile.close();
+		file.close();
+
+	const char tempFileChar[] = "update.txt";
+	const char bankFileChar[] = "bank.txt";
+	int result = remove(bankFileChar);
+	int resukt2 = rename(tempFileChar, bankFileChar);
 }

@@ -5,6 +5,10 @@
 //CONSTRUCTORS
 BankAccount::BankAccount() {
 	this->accountBalance = 0;
+	//this->email = "";
+	//this->phoneNumber = "";
+	//this->surname = "";
+	//this->firstname = "";
 }
 
 
@@ -119,6 +123,7 @@ void BankAccount::setAccountType(string acctType)
 {
 	if (acctType == "SAVINGS" || acctType == "CURRENT") {
 		this->accountType = acctType;
+		return;
 	}
 	throw invalid_argument("Account Type Entered not recognized");
 }
@@ -131,7 +136,7 @@ string BankAccount::getAccountType()
 istream& operator>>(istream& input, BankAccount& acct) {
 	input >> acct.accountNumber >> acct.email >> acct.phoneNumber
 		>> acct.surname >> acct.firstname >> acct.accountBalance >> acct.birthMonth
-		>> acct.birthDate >> acct.birthYear;
+		>> acct.birthDate >> acct.birthYear>>acct.accountType;
 	return input;
 }
 
@@ -139,7 +144,7 @@ ofstream& operator<<(ofstream& output, BankAccount& acct) {
 	output << acct.accountNumber << " " << acct.email << " "
 		<< acct.phoneNumber << " " << acct.surname << " " << acct.firstname << " "
 		<< acct.accountBalance << " " << acct.birthDate << " " << acct.birthMonth << " "
-		<< acct.birthYear << endl;;
+		<< acct.birthYear << " " << acct.accountType << endl;;
 	return output;
 }
 
