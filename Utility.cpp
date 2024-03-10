@@ -89,10 +89,14 @@ bool Utility::updateAccountInFile(BankAccount updatedAcct) {
 		}
 			resultOfOperation = true;
 		}
-	const char* tempFileChar = tempFile.c_str();
-	const char* bankFileChar = bankFile.c_str();
-	remove(bankFileChar);
-	rename(tempFileChar, bankFileChar);
+	inFile.close();
+	outfile.close();
+
+
+	const char tempFileChar[] = "update.txt";
+	const char bankFileChar[] = "bank.txt";
+	int result = remove(bankFileChar);
+	int resukt2=rename(tempFileChar, bankFileChar);
 	return resultOfOperation;
 }
 
