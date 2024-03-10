@@ -9,8 +9,8 @@ using namespace std;
 
 
 //CONSTANT
-const double interestRateForSavingsAccount = 0.2;
-const double interestRateForCurrent = 0.05;
+const double interestRateForSavingsAccount = 0.1; //10 percent
+const double interestRateForCurrent = 0.05; //5 percent
 const string bankFile = "bank.txt";
 string Utility::generateRandom(string prefix) {
 	string random = to_string((rand() % 1000000000000));
@@ -135,9 +135,13 @@ void Utility::addInterestToAllAccount()
 		}
 		outFile.close();
 		file.close();
-
 	const char tempFileChar[] = "update.txt";
 	const char bankFileChar[] = "bank.txt";
 	int result = remove(bankFileChar);
-	int resukt2 = rename(tempFileChar, bankFileChar);
+	int result2 = rename(tempFileChar, bankFileChar);
+	if (result != 0 && result2 != 0) {
+		throw invalid_argument("Unable to update");
+	}
+	cout << "Operation completed without errors" << endl;;
+	return;
 }
