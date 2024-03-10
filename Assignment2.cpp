@@ -92,14 +92,14 @@ void withdrawCashOperation() {
 	Utility::verifyUserInput();
 	//get Account Details
 	cout << "Searching for accouint..." << endl;
-	BankAccount account = Utility::getAccountDetailsFromAccountNumber(accountNumber);
+	BankAccount account = Utility::getBankDetailsFromFile(accountNumber);
 	cout << "Account Auth Succeeded!" << endl;
 	cout << "Kindly enter amount you wish to WIthdraw: " << endl;
 	double amount = 0;
 	cin >> amount;
 	Utility::verifyUserInput();
 	bool isSuccessful = account.debitAccount(amount);
-	isSuccessful = Utility::saveAccountToFile(account);
+	isSuccessful = Utility::saveBankToFile(account);
 	if (!isSuccessful) {
 		throw invalid_argument("Operation Failed");
 		return;
@@ -125,14 +125,14 @@ void addCashOperation() {
 	Utility::verifyUserInput();
 	//get Account Details
 	cout << "Searching for accouont..."<<endl;
-	BankAccount account = Utility::getAccountDetailsFromAccountNumber(accountNumber);
+	BankAccount account = Utility::getBankDetailsFromFile(accountNumber);
 	cout << "Account Auth Succeeded!" << endl;
 	cout << "Kindly enter amount you wish to credit your account with below " << endl;
 	double amount = 0;
 	cin >> amount;
 	Utility::verifyUserInput();
 	account.creditAccount(amount);
-	bool isOperationSuccessful = Utility::saveAccountToFile(account);
+	bool isOperationSuccessful = Utility::updateAccountInFile(account);
 	if (!isOperationSuccessful) {
 		throw invalid_argument("Operation failed while Updating details!");
 		return;
@@ -220,7 +220,7 @@ void registerAnAccountOperation(){
 	//generate account number
 	string accountNumber = Utility::generateRandom("ACC-");
 	bankAccount.setAccountNumber(accountNumber);
-	bool isOperationSuccessful = Utility::saveBankToArray(bankAccount);
+	bool isOperationSuccessful = Utility::saveBankToFile(bankAccount);
 	if (!isOperationSuccessful) {
 		throw invalid_argument("Unable to create account");
 		return;

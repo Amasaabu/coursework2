@@ -16,6 +16,8 @@ private:
 	string surname="";
 	string firstname="";
 	double accountBalance=0;
+
+	string accountType;
 //	Transaction transaction[];
 public:
 	BankAccount();
@@ -49,7 +51,12 @@ public:
 	bool debitAccount(double);
 	void creditAccount(double);
 
+	void setAccountType(string);
+	string getAccountType();
+
 	friend istream& operator>>(istream& input, BankAccount& acct);
+	friend ofstream& operator<<(ofstream& input, BankAccount& acct);
+
 	//void serialize(std::ostream& os) const {
 	//	// Serialize each member variable individually
 	//	os << accountNumber << " " << email << " "  << " "

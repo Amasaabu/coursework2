@@ -109,9 +109,23 @@ bool BankAccount::debitAccount(double amount) {
 	return result;
 }
 
+
 void BankAccount::creditAccount(double amount) {
 	double newBalance = this->accountBalance + amount;
 	this->accountBalance = newBalance;
+}
+
+void BankAccount::setAccountType(string acctType)
+{
+	if (acctType == "SAVINGS" || acctType == "CURRENT") {
+		this->accountType = acctType;
+	}
+	throw invalid_argument("Account Type Entered not recognized");
+}
+
+string BankAccount::getAccountType()
+{
+	return this->accountType;
 }
 
 istream& operator>>(istream& input, BankAccount& acct) {
@@ -119,5 +133,13 @@ istream& operator>>(istream& input, BankAccount& acct) {
 		>> acct.surname >> acct.firstname >> acct.accountBalance >> acct.birthMonth
 		>> acct.birthDate >> acct.birthYear;
 	return input;
+}
+
+ofstream& operator<<(ofstream& output, BankAccount& acct) {
+	output << acct.accountNumber << " " << acct.email << " "
+		<< acct.phoneNumber << " " << acct.surname << " " << acct.firstname << " "
+		<< acct.accountBalance << " " << acct.birthDate << " " << acct.birthMonth << " "
+		<< acct.birthYear << endl;;
+	return output;
 }
 

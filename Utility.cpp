@@ -9,42 +9,15 @@ using namespace std;
 
 
 //CONSTANT
-const string fileExtension = ".bin";
+const double interestRateForSavingsAccount = 0.2;
+const double interestRateForCurrent = 0.05;
 const string bankFile = "bank.txt";
 string Utility::generateRandom(string prefix) {
 	string random = to_string((rand() % 1000000000000));
 	return (prefix + random);
 }
 
-//bool Utility::saveAccountToFile(BankAccount bankAccount) {
-//	ofstream file;
-//	file.open(bankAccount.getAccountNumber() + fileExtension);
-//	if (file.is_open()) {
-//		//file.write((char*)&bankAccount, sizeof(bankAccount));
-//		bankAccount.serialize(file);
-//		file.close();
-//		return true;
-//	}
-//	else {
-//		return false;
-//	}
-//}
 
-
-//BankAccount Utility::getAccountDetailsFromAccountNumber(string accountNumber) {
-//	BankAccount account;
-//	ifstream readFIle;
-//	readFIle.open(accountNumber + fileExtension);
-//	if (readFIle.is_open()) {
-//		//readFIle.read((char*)&account, sizeof(account));
-//		account.deserialize(readFIle);
-//		readFIle.close();
-//	}
-//	else {
-//		throw invalid_argument("Unable to get account details, ensure account number inputed is correct");
-//	}
-//	return account;
-//}
 
 void Utility::verifyUserInput() {
 	// check if there was an error reading the line or if there are any non-new line in the stream.
@@ -57,15 +30,12 @@ void Utility::verifyUserInput() {
 	}
 }
 
-bool Utility::saveBankToArray(BankAccount acct) {
+bool Utility::saveBankToFile(BankAccount acct) {
 	bool result = false;
 	ofstream file;
 	file.open(bankFile, ios::app);
 	if (file.is_open()) {
-		file << acct.getAccountNumber() << " " << acct.getEmail() << " " << " "
-			<< acct.getPhoneNumber() << " " << acct.getSurname() << " " << acct.getFirstName() << " "
-			<< acct.getAccountBalance() << " " << acct.getBirthDate() << " " << acct.getBirthMonth() << " "
-			<< acct.getBirthYear() << endl;
+		file << acct <<endl;
 		file.close();
 		return true;
 	}
@@ -93,4 +63,71 @@ BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
 		throw invalid_argument("No account found, kindly try again, or create a new account");
 	}
 	return foundBankAccount;
+}
+
+
+bool Utility::updateAccountInFile(BankAccount updatedAcct) {
+	//account already available, we now try to update in file
+	string tempFile = "update.txt";
+	ifstream inFile;
+	ofstream outfile;
+	inFile.open(bankFile);
+	outfile.open(tempFile);
+	BankAccount temp;
+	bool resultOfOperation = false;
+	if (!inFile.is_open()) {
+		//IO exception
+	}
+	while (inFile>>temp)
+		{
+		if (temp.getAccountNumber() == updatedAcct.getAccountNumber()) {
+				//this is where we update the file
+				outfile << updatedAcct;
+		}
+		else {
+			outfile << temp;
+		}
+			resultOfOperation = true;
+		}
+	const char* tempFileChar = tempFile.c_str();
+	const char* bankFileChar = bankFile.c_str();
+	remove(bankFileChar);
+	rename(tempFileChar, bankFileChar);
+	return resultOfOperation;
+}
+
+
+void Utility::addInterestToAllAccount()
+{
+	string tempFileName = "temp.txt";
+	//load all account
+	ifstream file;
+	ofstream outFile;
+	file.open(bankFile);
+	outFile.open(tempFileName);
+	BankAccount temp;
+
+	if (file.is_open()&&outFile.is_open()) {
+		while (file >> temp) {
+			if (temp.getAccountType() == "SAVINGS") {
+				//interest rate for savings
+				double interestAmt = interestRateForSavingsAccount * temp.getAccountBalance();
+				double newAmount = interestAmt + temp.getAccountBalance();
+				temp.setAccountBalance(newAmount);
+				
+			}
+			else if (temp.getAccountType() == "CURRENT") {
+				//interest rate for current
+				double interestAmt = interestRateForCurrent * temp.getAccountBalance();
+				double newAmount = interestAmt + temp.getAccountBalance();
+				temp.setAccountBalance(newAmount);
+			}
+
+			outFile<<temp;
+			const char* tempChar = tempFileName.c_str();
+			const char* newNameChar = bankFile.c_str();
+			rename(tempChar, newNameChar);
+			
+		}
+	} 
 }
