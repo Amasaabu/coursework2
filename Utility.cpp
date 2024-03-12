@@ -12,8 +12,14 @@ using namespace std;
 const double interestRateForSavingsAccount = 0.1; //10 percent
 const double interestRateForCurrent = 0.05; //5 percent
 const string bankFile = "bank.txt";
+
+
+//Utility static method to generate random account number
 string Utility::generateRandom(string prefix) {
-	string random = to_string((rand() % 1000000000000));
+	string random="";
+	for (int i = 0; i <= 6; i++) {
+		 random = random+ to_string((rand() % 9));
+	}
 	return (prefix + random);
 }
 

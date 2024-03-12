@@ -84,8 +84,9 @@ int main()
 			cout << "Exiting program..." << endl;
 		}
 
-		catch (const std::exception&)
+		catch (const std::exception& e)
 		{
+			cout << e.what()<<endl;
 			cout << "An exception occured"<<endl;
 		}
 
