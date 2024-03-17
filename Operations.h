@@ -7,5 +7,6 @@ public:
 	static void addCashOperation();
 	static void withdrawCashOperation();
 	static void addInterestToAllAccountsOperation();
+	static void updateAccountDetailsOperation();
 };
 

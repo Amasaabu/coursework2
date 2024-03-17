@@ -2,6 +2,7 @@
 
 
 #include <iostream>
+#include <string>
 #include "Utility.h"
 
 using namespace std;
@@ -182,4 +183,44 @@ void Operations::registerAnAccountOperation() {
 	cout << "1. Account Number: " << bankAccount.getAccountNumber() << endl;
 	cout << "1. Surname: " << bankAccount.getSurname() << endl;
 	cout << "****************" << endl;
+}
+
+/**
+* Update account details
+*/
+
+void Operations::updateAccountDetailsOperation() {
+	cout << "Kindly enter account number you wish to update details" << endl;
+	cout << "***Note: You can only modify firstname, email, phone number and account type" << endl;
+	string accountNumber;
+	cin >> accountNumber;
+	Utility::verifyUserInput();
+	
+	//get account from account number
+	BankAccount userAccount= Utility::getBankDetailsFromFile(accountNumber);
+	cout << "Account found, welcome: " << userAccount.getSurname() << endl;;
+
+	string newFistName;
+	cin.clear();
+	cin.ignore();
+	cout << "Enter new first name you wish to make use of below or otherwise leave blank if you want it to remain as " << userAccount.getFirstName() << endl;
+	getline(cin,newFistName);
+	if (newFistName == "") newFistName = userAccount.getFirstName();
+	userAccount.setFirstName(newFistName);
+
+	string newEmail;
+	cout << "Enter new email address you wish to make use of below or otherwise leave blank if you want it to remain as " << userAccount.getEmail() << endl;
+	getline(cin, newEmail);
+	if (newEmail == "") newEmail = userAccount.getEmail();
+	userAccount.setEmail(newEmail);
+
+	string phoneNumber;
+	cout << "Enter new phone number you wish to make use of below or otherwise leave blank if you want it to remain as " << userAccount.getEmail() << endl;
+	getline(cin, phoneNumber);
+	if (phoneNumber == "") phoneNumber = userAccount.getPhoneNumber();
+	userAccount.setPhoneNumber(phoneNumber);
+
+	//Update
+	Utility::updateAccountInFile(userAccount);
+	cout << "Account updated successfully" << endl;
 }

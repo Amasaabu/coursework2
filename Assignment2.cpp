@@ -22,9 +22,12 @@ using namespace  std;
 *	b. View account details
 *	c. withdraw cash
 *	d. Deposit cash
+*	e. Update account details
 * 
 * 4. All account are stored in text file (bank.txt)
 * 5. Accounts can be either savings or current
+* 
+*
 */
 
 int main()
@@ -81,7 +84,8 @@ int main()
 			else if (firstInput == "2") { // LOGIN MODE (Admin)
 				cout << "Admin Options: " << endl;
 				cout << "1. To add interest to all account" << endl;
-				cout << "2. To exit the preogram" << endl;
+				cout << "2. Modify account details" << endl;
+				cout << "3. To exit the program" << endl;
 				string secondInput = "";
 				cin >> secondInput;
 				if (secondInput == "1") {
@@ -89,6 +93,9 @@ int main()
 					continue;
 				}
 				else if (secondInput == "2") {
+					Operations::updateAccountDetailsOperation();
+				}
+				else if (secondInput == "3") {
 					cout << "Safely exiting Program..." << endl;
 					return 0;
 				}
