@@ -151,3 +151,8 @@ void Utility::addInterestToAllAccount()
 	cout << "Operation completed without errors" << endl;;
 	return;
 }
+
+
+/*
+* Get All Account
+*/
