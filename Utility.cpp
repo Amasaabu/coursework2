@@ -24,7 +24,7 @@ string Utility::generateRandom(string prefix) {
 }
 
 
-
+//Utility static method to verify user input
 void Utility::verifyUserInput() {
 	// check if there was an error reading the line or if there are any non-new line in the stream.
 	if (cin.fail() || cin.peek() != '\n') {

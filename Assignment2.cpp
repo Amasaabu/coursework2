@@ -2,15 +2,6 @@
 //
 
 
-
-//to do
-// start implementing transactions
-// validate user input string fields to ensure numbers are not part of user input
-// implement password validation
-// store transaction history
-// generate receipt for transaction
-//store account in a directory
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -36,44 +27,69 @@ int main()
 	bool isValidInput = true;
 	string firstInput = "";
 	do {
-		cout << "Welcome to our Banking app" << endl;
-		cout << "Kindly enter an option from the list below" << endl;
-		cout << "1. Register a new account" << endl;
-		cout << "2. View Account Details" << endl;
-		cout << "3. Deposit Cash" << endl;
-		cout << "4. Withdraw Cash" << endl;
-		cout << "5. To add interest to all account" << endl;
-		cout << "6. To exit the preogram" << endl;
+		cout << "Welcome to Banking app" << endl;
+		cout << "Please select an option below: " << endl;
+		cout << "1. Continue as a customer" << endl;
+		cout << "2. Continue as an admin" << endl;
 		cin >> firstInput;
-		cout << "*****************" << endl;
 		try
 		{
+			// Login Mode (Customer)
 			if (firstInput == "1") {
-				registerAnAccountOperation();
-				continue;
+				cout << "Customer Options: " << endl;
+				cout << "Kindly enter an option from the list below" << endl;
+				cout << "1. Register a new account" << endl;
+				cout << "2. View Account Details" << endl;
+				cout << "3. Deposit Cash" << endl;
+				cout << "4. Withdraw Cash" << endl;
+				cout << "5. To exit the preogram" << endl;
+				string secondInput = "";
+				cin >> secondInput;
+				if (secondInput == "1") {
+					registerAnAccountOperation();
+					continue;
 
+				}
+				else if (secondInput == "2") {
+					getAccountDetailsOperation();
+					continue;
+				}
+				else if (secondInput == "3") {
+					addCashOperation();
+					continue;
+				}
+				else if (secondInput == "4") {
+					withdrawCashOperation();
+					continue;
+				}
+				else if (secondInput == "5") {
+					cout << "Safely exiting Program..." << endl;
+					return 0;
+				}
+				else {
+					cout << "An invalid input entered, please try again " << endl;
+					continue;
+				}
 			}
-			else if (firstInput == "2") {
-				getAccountDetailsOperation();
-				continue;
+			else if (firstInput == "2") { // LOGIN MODE (Admin)
+				cout << "Admin Options: " << endl;
+				cout << "1. To add interest to all account" << endl;
+				cout << "2. To exit the preogram" << endl;
+				string secondInput = "";
+				cin >> secondInput;
+				if (secondInput == "1") {
+					addInterestToAllAccountsOperation();
+					continue;
+				}
+				else if (secondInput == "2") {
+					cout << "Safely exiting Program..." << endl;
+					return 0;
+				}
+				else {
+					cout << "An invalid input entered, please try again " << endl;
+					continue;
+				}
 			}
-			else if(firstInput == "3") {
-				addCashOperation();
-				continue;
-			}
-			else if (firstInput == "4") {
-				withdrawCashOperation();
-				continue;
-			}
-			else if (firstInput=="5") {
-				addInterestToAllAccountsOperation();
-				continue;
-			}
-			else if(firstInput=="6") {
-				cout << "Safely exiting Program..."<<endl;
-				return 0;
-			}
-			
 			else {
 				cout << "An invalid input entered, please try again " << endl;
 				continue;
@@ -86,8 +102,8 @@ int main()
 
 		catch (const std::exception& e)
 		{
-			cout << e.what()<<endl;
-			cout << "An exception occured"<<endl;
+			cout << e.what() << endl;
+			cout << "An exception occured" << endl;
 		}
 
 	} while (isValidInput);
@@ -105,7 +121,7 @@ void addInterestToAllAccountsOperation() {
 		return;
 	}
 	else {
-		cout << "Operation aborted!!! exiting to main menu" << endl;
+		cout << "******Operation aborted!!! exiting to main menu******" << endl;
 		return;
 	}
 }
@@ -117,9 +133,9 @@ void withdrawCashOperation() {
 	cin >> accountNumber;
 	Utility::verifyUserInput();
 	//get Account Details
-	cout << "Searching for accouint..." << endl;
+	cout << "Searching for account..." << endl;
 	BankAccount account = Utility::getBankDetailsFromFile(accountNumber);
-	cout << "Account Auth Succeeded!" << endl;
+	cout << "Account Auth Succeeded!!" << endl;
 	cout << "Kindly enter amount you wish to WIthdraw: " << endl;
 	double amount = 0;
 	cin >> amount;
@@ -134,12 +150,7 @@ void withdrawCashOperation() {
 	cout << "" << endl;
 	cout << "Account Number: " << account.getAccountNumber() << endl;
 	cout << "New Balance: " << account.getAccountBalance() << endl;
-	cout << "" << endl;
-	
-
-
-
-
+	cout << "*********" << endl;
 }
 
 
