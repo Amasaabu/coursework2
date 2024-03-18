@@ -201,6 +201,7 @@ void Operations::updateAccountDetailsOperation() {
 	cout << "Account found, welcome: " << userAccount.getSurname() << endl;;
 
 	string newFistName;
+	//clear any character in the buffer before calling getline()
 	cin.clear();
 	cin.ignore();
 	cout << "Enter new first name you wish to make use of below or otherwise leave blank if you want it to remain as " << userAccount.getFirstName() << endl;
