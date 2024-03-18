@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include "Transaction.h"
 
 using namespace std;
 class BankAccount
@@ -18,7 +17,6 @@ private:
 	double accountBalance=0;
 
 	string accountType="SAVINGS";
-//	Transaction transaction[];
 public:
 	BankAccount();
 	string getAccountNumber();
@@ -56,21 +54,6 @@ public:
 
 	friend istream& operator>>(istream& input, BankAccount& acct);
 	friend ofstream& operator<<(ofstream& input, BankAccount& acct);
-
-	//void serialize(std::ostream& os) const {
-	//	// Serialize each member variable individually
-	//	os << accountNumber << " " << email << " "  << " "
-	//		<< phoneNumber << " " << surname << " " << firstname << " "
-	//		<< accountBalance << " " << birthMonth << " " << birthDate << " "
-	//		<< birthYear << "\n";
-	//}
-
-	//void deserialize(std::istream& is) {
-	//	// Deserialize each member variable individually
-	//	is >> accountNumber >> email  >> phoneNumber
-	//		>> surname >> firstname >> accountBalance >> birthMonth
-	//		>> birthDate >> birthYear;
-	//}
 
 };
 
