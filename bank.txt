@@ -1,1 +1,5 @@
 ACC-0456104 Adee 020321013 Amasa King 20 10 3 1990 SAVINGS
+ACC-0716542 abubakar@gmail.com 08091121009 Amasa Abubakar 0 3 10 1990 CURRENT
+
+ACC-6434187 abubakar@gmail.com 08091121009 Amasa Abubakar 0 5 10 1990 CURRENT
+
