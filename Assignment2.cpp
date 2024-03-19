@@ -34,9 +34,12 @@ using namespace  std;
 int main()
 {
 	srand((unsigned)time(NULL));
-	while (true){
+	bool menuExitedSuccessfully = false;
+	while (!menuExitedSuccessfully){
 		try {
 			Menu::intialize();
+			// if we get here it means all went well in menu initialization
+			menuExitedSuccessfully = true;
 		}
 		catch (invalid_argument& e) {
 			cerr << e.what() << endl;

@@ -6,13 +6,13 @@
 using namespace std;
 
 void Menu::intialize() {
-	string firstInput = "";
-	do {
+	while (true) {
+		string firstInput = "";
 		cout << "Welcome to Banking app" << endl;
 		cout << "Please select an option below: " << endl;
 		cout << "1. Continue as a customer" << endl;
 		cout << "2. Continue as an admin" << endl;
-		cout << "Enter any other key to exit application"<<endl;
+		cout << "Enter any other key to exit application" << endl;
 		cin >> firstInput;
 		if (firstInput == "1") {
 			initializeCustomerMenu();
@@ -20,10 +20,10 @@ void Menu::intialize() {
 		else if (firstInput == "2") {
 			initializeAdminMenu();
 		}
-		else {
-			break;
+		else if (firstInput == "3") {
+			return;
 		}
-	} while (true);
+	}
 }
 
 void Menu::initializeCustomerMenu() {
