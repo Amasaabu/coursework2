@@ -34,9 +34,6 @@ using namespace  std;
 int main()
 {
 	srand((unsigned)time(NULL));
-
-	bool isValidInput = true;
-	string firstInput = "";		
 	try {
 		Menu::intialize();
 		cout << "Application exiting..."<<endl;
