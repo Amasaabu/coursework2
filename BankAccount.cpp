@@ -34,12 +34,12 @@ int BankAccount::getBirthMonth() {
 }
 
 void BankAccount::setBirthYear(int birthYear) {
+	if (birthYear < 1000 || birthYear>9999) {
+		throw invalid_argument("Invalid birth year entered");
+	}
 	this->birthYear = birthYear;
 }
 int BankAccount::getBirthYear() {
-	if (birthDate < 0001 || birthDate>9999) {
-		throw invalid_argument("Invalid birth year entered, value must be between 1 and 31");
-	}
 	return this->birthYear;
 }
 

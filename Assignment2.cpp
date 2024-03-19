@@ -34,18 +34,19 @@ using namespace  std;
 int main()
 {
 	srand((unsigned)time(NULL));
-	try {
-		Menu::intialize();
-		cout << "Application exiting..."<<endl;
-	}
-	catch (invalid_argument& e) {
-		cerr << e.what() << endl;
-		cout << "Exiting program..." << endl;
+	while (true){
+		try {
+			Menu::intialize();
+		}
+		catch (invalid_argument& e) {
+			cerr << e.what() << endl;
+			cout << "Exiting to main menu..." << endl;
+		}
+		catch (const std::exception& e)
+		{
+			cout << e.what() << endl;
+			cout << "An exception occured" << endl;
+		}
 	}
 
-	catch (const std::exception& e)
-		{
-		cout << e.what() << endl;
-		cout << "An exception occured" << endl;
-		}
 }

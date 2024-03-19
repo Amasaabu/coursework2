@@ -6,7 +6,6 @@
 using namespace std;
 
 void Menu::intialize() {
-	bool isValidInput = true;
 	string firstInput = "";
 	do {
 		cout << "Welcome to Banking app" << endl;
@@ -19,12 +18,12 @@ void Menu::intialize() {
 			initializeCustomerMenu();
 		}
 		else if (firstInput == "2") {
-			initializeCustomerMenu();
+			initializeAdminMenu();
 		}
 		else {
 			break;
 		}
-	} while (isValidInput);
+	} while (true);
 }
 
 void Menu::initializeCustomerMenu() {
