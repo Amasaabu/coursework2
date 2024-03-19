@@ -134,14 +134,17 @@ void Operations::registerAnAccountOperation() {
 	cout << "Kindly provide the details required below: " << endl;
 	cout << "Please input your firstname: " << endl;
 	cin >> firstname;
+	Utility::verifyUserInput();
 	bankAccount.setFirstName(firstname);
 
 	cout << "Please input your lastName/surname/familyname: " << endl;
 	cin >> surname;
+	Utility::verifyUserInput();
 	bankAccount.setSurname(surname);
 
 	cout << "Please input your email: " << endl;
 	cin >> email;
+	Utility::verifyUserInput();
 	bankAccount.setEmail(email);
 
 	cout << "Please input your birth year (e.g 2002): " << endl;
@@ -159,8 +162,10 @@ void Operations::registerAnAccountOperation() {
 	Utility::verifyUserInput();
 	bankAccount.setBirthDate(birthDate);
 
-	cout << "Please input your phone number" << endl;
+	cout << "Please input your phone number, No country code" << endl;
 	cin >> phoneNumber;
+	bool isInvalid = Utility::checkInvalidNumInString(phoneNumber);
+	if (isInvalid) throw invalid_argument("Ensure phonenumber are all digit");
 	bankAccount.setPhoneNumber(phoneNumber);
 
 	cout << "Please select account type, (1) for savings (2) for current. If invalid type is entered account is assumed to be savings" << endl;

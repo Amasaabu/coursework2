@@ -14,6 +14,7 @@ public:
 
 	static bool saveBankToFile(BankAccount acct);
 	static BankAccount getBankDetailsFromFile(string );
-	static void updateAccountInFile(BankAccount updatedAcct);
+	static void updateAccountInFile(BankAccount);
+	static bool checkInvalidNumInString(string&);
 };
 

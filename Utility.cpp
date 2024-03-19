@@ -32,7 +32,7 @@ void Utility::verifyUserInput() {
 		cin.clear();
 		//clears the invalid input, size of input is max amount of stream and any new line in the stream.
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		throw std::invalid_argument("****Invalid input detected***** \nProgram Restarting....");
+		throw std::invalid_argument("****Invalid input detected****");
 	}
 }
 
@@ -152,6 +152,15 @@ void Utility::addInterestToAllAccount()
 	return;
 }
 
+
+bool Utility::checkInvalidNumInString(string &val) {
+	for (char c : val) {
+		if (!isdigit(c)) {
+			return true;
+		}
+	}
+	return false;
+}
 
 /*
 * Get All Account
