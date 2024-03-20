@@ -43,12 +43,12 @@ int main()
 		}
 		catch (invalid_argument& e) {
 			cerr << e.what() << endl;
-			cout << "Exiting to main menu..." << endl;
+			cout << "Kindly try again" << endl;
 		}
 		catch (const std::exception& e)
 		{
 			cout << e.what() << endl;
-			cout << "An exception occured" << endl;
+			cout << "Kindly try again" << endl;
 		}
 	}
 

@@ -17,7 +17,7 @@ void Operations::addInterestToAllAccountsOperation() {
 		return;
 	}
 	else {
-		cout << "******Operation aborted!!! exiting to main menu******" << endl;
+		cout << "******Operation aborted!!!" << endl;
 		return;
 	}
 }
@@ -28,22 +28,15 @@ void Operations::addInterestToAllAccountsOperation() {
 * Request user to input amount to withdraw
 * Account can not go into negative
 */
-void Operations::withdrawCashOperation() {
-	string accountNumber = "";
-	cout << "Please anter account Number below: " << endl;
-	cin >> accountNumber;
-	Utility::verifyUserInput();
-	//get Account Details
-	cout << "Searching for account..." << endl;
-	BankAccount account = Utility::getBankDetailsFromFile(accountNumber);
-	cout << "Account Auth Succeeded!!" << endl;
-	cout << "Kindly enter amount you wish to WIthdraw: " << endl;
+void Operations::withdrawCashOperation(BankAccount& account) {
+	cout << "Kindly enter amount to withdraw below: " << endl;
 	double amount = 0;
 	cin >> amount;
 	Utility::verifyUserInput();
 	bool isSuccessful = account.debitAccount(amount);
 	if (!isSuccessful) {
-		throw invalid_argument("Operation Failed");
+		//operation failed for some other reason apart from insufficient balance
+		cout<< "Operation Failed"<<endl;
 		return;
 	}
 	Utility::updateAccountInFile(account);
@@ -60,16 +53,8 @@ void Operations::withdrawCashOperation() {
 * Request User to input account number and then validate this account
 * Request user to input amount to add
 */
-void Operations::addCashOperation() {
-	string accountNumber = "";
-	cout << "Please anter account Number below: " << endl;
-	cin >> accountNumber;
-	Utility::verifyUserInput();
-	//get Account Details
-	cout << "Searching for accouont..." << endl;
-	BankAccount account = Utility::getBankDetailsFromFile(accountNumber);
-	cout << "Account Auth Succeeded!" << endl;
-	cout << "Kindly enter amount you wish to credit your account with below " << endl;
+void Operations::addCashOperation(BankAccount& account) {
+	cout << "Kindly enter amount to add to account below: "<<endl;
 	double amount = 0;
 	cin >> amount;
 	Utility::verifyUserInput();
@@ -86,13 +71,8 @@ void Operations::addCashOperation() {
 * Get account details operation
 * Request User to input account number and then validate this account
 */
-void Operations::getAccountDetailsOperation() {
-	string accountNumber = "";
-	cout << "Input Account Number Below: " << endl;
-	cin >> accountNumber;
-	BankAccount accountDetails = Utility::getBankDetailsFromFile(accountNumber);
+void Operations::getAccountDetailsOperation(BankAccount& accountDetails) {
 	cout << "*******************" << endl;
-	cout << "Searching for Account Details..." << endl;
 	cout << "Account Details: " << endl;
 	cout << "" << endl;
 	cout << "Account Number: " << accountDetails.getAccountNumber() << endl;
@@ -109,10 +89,27 @@ void Operations::getAccountDetailsOperation() {
 	cout << ".........................." << endl;
 	cout << "Account Balance: " << accountDetails.getAccountBalance() << endl;
 	cout << "" << endl;
-
 	return;
+}
 
-
+/**
+* Authenticate Bank account via surname and return bank account object
+*/
+BankAccount Operations::authenticateBankAccount() {
+	string accountNumber = "";
+	cout << "Input Account Number Below: " << endl;
+	cin >> accountNumber;
+	BankAccount accountDetails = Utility::getBankDetailsFromFile(accountNumber);
+	cout << "*******************" << endl;
+	cout << "To authenticate, input account surname below" << endl;
+	string inputedSurname = "";
+	cin >> inputedSurname;
+	Utility::verifyUserInput();
+	if (inputedSurname != accountDetails.getSurname()) {
+		throw exception("Unable to authenticate account");
+	}
+	cout << "*****Authentication Suceeded****"<<endl;
+	return accountDetails;
 }
 
 /**

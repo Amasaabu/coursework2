@@ -66,7 +66,7 @@ BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
 	}
 	//checking if no account was found
 	if (foundBankAccount.getAccountNumber() == "") {
-		throw invalid_argument("No account found, kindly try again, or create a new account");
+		throw exception("No account found, kindly try again, or create a new account");
 	}
 	return foundBankAccount;
 }

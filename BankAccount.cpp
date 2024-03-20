@@ -105,7 +105,7 @@ bool BankAccount::debitAccount(double amount) {
 	double temporaryNewBalance = this->accountBalance - amount;
 	if (temporaryNewBalance < 0)
 	{
-		throw  invalid_argument("Insufficient account balance to complete request");
+		cout<< "*****Insufficient account balance to complete request*****"<<endl;
 		return false;
 	}
 	this->accountBalance = temporaryNewBalance;

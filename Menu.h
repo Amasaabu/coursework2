@@ -1,9 +1,10 @@
 #pragma once
 class Menu
 {
-public:
-	static void intialize();
+private:
 	static void initializeAdminMenu();
 	static void initializeCustomerMenu();
+public:
+	static void intialize();
 };
 
