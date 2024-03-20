@@ -63,6 +63,11 @@ void Menu::initializeCustomerMenu() {
 }
 
 void Menu::initializeAdminMenu() {
+	string password = "";
+	cout << "Kindly enter admin access password below: " << endl;
+	cin >> password;
+	Utility::verifyUserInput();
+	if (password != "admin") throw exception("Invalid admin password. Because this is a demo app, the password is (admin)");
 	cout << "Admin Options: " << endl;
 	cout << "1. To add interest to all account" << endl;
 	cout << "2. Modify account details" << endl;
