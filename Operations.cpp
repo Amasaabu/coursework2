@@ -197,15 +197,15 @@ void Operations::registerAnAccountOperation() {
 */
 
 void Operations::updateAccountDetailsOperation() {
-	cout << "Kindly enter account number you wish to update details" << endl;
-	cout << "***Note: You can only modify firstname, email, phone number and account type" << endl;
+	cout << "***Note: You can only modify firstname, email, phone number and password" << endl;
+	cout << "Kindly enter account number for whish you wish to update details: " << endl;
 	string accountNumber;
 	cin >> accountNumber;
 	Utility::verifyUserInput();
 	
 	//get account from account number
 	BankAccount userAccount= Utility::getBankDetailsFromFile(accountNumber);
-	cout << "Account found, welcome: " << userAccount.getSurname() << endl;;
+	cout << "Account found, Account in view: " << userAccount.getAccountNumber() << endl;;
 
 	string newFistName;
 	//clear any character in the buffer before calling getline()
