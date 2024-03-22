@@ -101,11 +101,11 @@ BankAccount Operations::authenticateBankAccount() {
 	cin >> accountNumber;
 	BankAccount accountDetails = Utility::getBankDetailsFromFile(accountNumber);
 	cout << "*******************" << endl;
-	cout << "To authenticate, input account surname below" << endl;
-	string inputedSurname = "";
-	cin >> inputedSurname;
+	cout << "To authenticate, input account password below(CASE SENSITIVE). If you have forgotten your password kindly reach out to an admin to reset for you" << endl;
+	string password = "";
+	cin >> password;
 	Utility::verifyUserInput();
-	if (inputedSurname != accountDetails.getSurname()) {
+	if (password != accountDetails.getPassword()) {
 		throw exception("Unable to authenticate account");
 	}
 	cout << "*****Authentication Suceeded****"<<endl;
@@ -144,6 +144,11 @@ void Operations::registerAnAccountOperation() {
 	Utility::verifyUserInput();
 	bankAccount.setEmail(email);
 
+	cout << "Please create an account password you would like to use to authenticate: " << endl;
+	cin >> password;
+	Utility::verifyUserInput();
+	bankAccount.setPassword(password);
+
 	cout << "Please input your birth year (e.g 2002): " << endl;
 	cin >> birthYear;
 	Utility::verifyUserInput();
@@ -181,9 +186,9 @@ void Operations::registerAnAccountOperation() {
 		return;
 	}
 	//Display bank account details to customer
-	cout << "****Account Details***" << endl;
+	cout << "****Account created, see Account details, kindly select continue as a customer to sign in***" << endl;
 	cout << "1. Account Number: " << bankAccount.getAccountNumber() << endl;
-	cout << "1. Surname: " << bankAccount.getSurname() << endl;
+	cout << "2. Surname: " << bankAccount.getSurname() << endl;
 	cout << "****************" << endl;
 }
 
@@ -218,10 +223,16 @@ void Operations::updateAccountDetailsOperation() {
 	userAccount.setEmail(newEmail);
 
 	string phoneNumber;
-	cout << "Enter new phone number you wish to make use of below or otherwise leave blank if you want it to remain as " << userAccount.getEmail() << endl;
+	cout << "Enter new phone number you wish to make use of below or otherwise leave blank if you want it to remain as " << userAccount.getPhoneNumber() << endl;
 	getline(cin, phoneNumber);
 	if (phoneNumber == "") phoneNumber = userAccount.getPhoneNumber();
 	userAccount.setPhoneNumber(phoneNumber);
+
+	string password;
+	cout << "Enter new password you would like to use below otherwise leave blank if you do not wish to change"<< endl;
+	getline(cin, password);
+	if (password == "") password = userAccount.getPassword();
+	userAccount.setPassword(password);
 
 	//Update
 	Utility::updateAccountInFile(userAccount);

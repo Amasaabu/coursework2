@@ -14,22 +14,27 @@ private:
 	string phoneNumber="";
 	string surname="";
 	string firstname="";
+	string password="";
 	double accountBalance=0;
 
 	string accountType="SAVINGS";
 public:
 	BankAccount();
 	string getAccountNumber();
-
 	void setAccountNumber(string accountNumber);
 
 	void setEmail(string& email);
 	string getEmail();
+
 	void setPhoneNumber(string& phoneNumber);
 	string getPhoneNumber();
 
 	void setFirstName(string& firstName);
 	string getFirstName();
+
+	void setPassword(string& password);
+	string getPassword();
+
 	void setSurname(string&);
 	string getSurname();
 

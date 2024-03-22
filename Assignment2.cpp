@@ -38,7 +38,7 @@ int main()
 	while (!menuExitedSuccessfully){
 		try {
 			Menu::intialize();
-			// if we get here it means all went well in menu initialization
+			// if we get here it means all went well in menu initialization, and we can safely exit the program
 			menuExitedSuccessfully = true;
 		}
 		catch (invalid_argument& e) {
