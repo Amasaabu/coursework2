@@ -10,7 +10,7 @@ BankAccount::BankAccount() {
 
 	this-> accountNumber="";
 	this-> email="";
-	this-> phoneNumber="";
+	this-> currency="GBP";
 	this-> surname="";
 	this-> firstname="";
 	this-> password="";
@@ -76,13 +76,13 @@ string BankAccount::getEmail()
 {
 	return  this->email;
 }
-void BankAccount::setPhoneNumber(string& phoneNumber)
+void BankAccount::setCurrenecy(string& currency)
 {
-	this->phoneNumber = phoneNumber;
+	this->currency = currency;
 }
-string BankAccount::getPhoneNumber()
+string BankAccount::getCurrency()
 {
-	return this->phoneNumber;
+	return this->currency;
 }
 
 void BankAccount::setFirstName(string& firstName)
@@ -149,7 +149,7 @@ string BankAccount::getAccountType()
 }
 
 istream& operator>>(istream& input, BankAccount& acct) {
-	input >> acct.accountNumber >> acct.email >> acct.phoneNumber
+	input >> acct.accountNumber >> acct.email >> acct.currency
 		>> acct.surname >> acct.firstname >> acct.accountBalance >> acct.birthMonth
 		>> acct.birthDate >> acct.birthYear>>acct.accountType>>acct.password;
 	return input;
@@ -157,7 +157,7 @@ istream& operator>>(istream& input, BankAccount& acct) {
 
 ofstream& operator<<(ofstream& output, BankAccount& acct) {
 	output << acct.accountNumber << " " << acct.email << " "
-		<< acct.phoneNumber << " " << acct.surname << " " << acct.firstname << " "
+		<< acct.currency << " " << acct.surname << " " << acct.firstname << " "
 		<< acct.accountBalance << " " << acct.birthDate << " " << acct.birthMonth << " "
 		<< acct.birthYear << " " << acct.accountType <<" " << acct.password << endl;;
 	return output;

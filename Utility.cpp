@@ -114,6 +114,8 @@ void Utility::updateAccountInFile(BankAccount updatedAcct) {
 
 void Utility::addInterestToAllAccount()
 {
+	cout << "Saving Interest Rate: " << interestRateForSavingsAccount << endl;
+	cout << "Current Interest Rate: " << interestRateForCurrent << endl;
 	string tempFileName = "update.txt";
 	//load all account
 	ifstream file;
@@ -169,3 +171,20 @@ bool Utility::checkInvalidNumInString(string &val) {
 /*
 * Get All Account
 */
+vector<BankAccount> Utility::getAllAccount() {
+	ifstream file;
+	file.open(bankFile);
+	BankAccount temp;
+	vector<BankAccount> foundBankAccounts;
+	if (file.is_open()) {
+		while (file >> temp) {
+			//check each item from the text file
+			foundBankAccounts.push_back(temp);
+		}
+		file.close();
+	}
+	else {
+		throw exception("Unable to access bank file");
+	}
+	return foundBankAccounts;
+}

@@ -8,11 +8,14 @@ using namespace std;
 void Menu::intialize() {
 	while (true) {
 		string firstInput = "";
-		cout << "Welcome to Banking app" << endl;
+		cout << "*Main Menu*" << endl;
 		cout << "Please select an option below: " << endl;
 		cout << "1. Continue as a customer" << endl;
+		cout << ".........................." << endl;
 		cout << "2. Continue as an admin" << endl;
+		cout << ".........................." << endl;
 		cout << "3. Create a new Bank Account" << endl;
+		cout << ".........................." << endl;
 		cout << "Enter any other key to exit application" << endl;
 		cin >> firstInput;
 		Utility::verifyUserInput();
@@ -68,23 +71,30 @@ void Menu::initializeAdminMenu() {
 	cin >> password;
 	Utility::verifyUserInput();
 	if (password != "admin") throw exception("Invalid admin password. Because this is a demo app, the password is (admin)");
-	cout << "Admin Options: " << endl;
-	cout << "1. To add interest to all account" << endl;
-	cout << "2. Modify account details" << endl;
-	cout << "3. To exit to main menu" << endl;
-	string secondInput = "";
-	cin >> secondInput;
-	if (secondInput == "1") {
-		Operations::addInterestToAllAccountsOperation();
+	while (true) {
+		cout << "Admin Options: " << endl;
+		cout << "1. To add interest to all account" << endl;
+		cout << "2. Modify account details" << endl;
+		cout << "3. To see all accounts" << endl;
+		cout << "4. To exit to main menu" << endl;
+		string secondInput = "";
+		cin >> secondInput;
+		if (secondInput == "1") {
+			Operations::addInterestToAllAccountsOperation();
+		}
+		else if (secondInput == "2") {
+			Operations::updateAccountDetailsOperation();
+		}
+		else if (secondInput == "3") {
+			Operations::showAllAccount();
+		}
+		else if (secondInput == "4") {
+			//cout << "Safely exiting Program..." << endl;
+			return;
+		}
+		else {
+			cout << "An invalid input entered, please try again " << endl;
+		}
 	}
-	else if (secondInput == "2") {
-		Operations::updateAccountDetailsOperation();
-	}
-	else if (secondInput == "3") {
-		//cout << "Safely exiting Program..." << endl;
-		return;
-	}
-	else {
-		cout << "An invalid input entered, please try again " << endl;
-	}
+	
 }
