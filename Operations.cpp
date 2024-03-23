@@ -6,7 +6,10 @@
 #include "Utility.h"
 
 using namespace std;
-/**This function handles adding interest to an account*/
+/*
+*This function handles adding interest to an account
+* This operation is to be completed by an admin
+*/
 void Operations::addInterestToAllAccountsOperation() {
 	int confirmation = 0;
 	cout << "Are you sure you want to add interest to all account? Enter (1) if yes" << endl;;
@@ -24,7 +27,7 @@ void Operations::addInterestToAllAccountsOperation() {
 
 /**
 *Withdraw Cash from an account
-* Request User to input account number and then validate this account
+* Operation can only be completed by a validated user
 * Request user to input amount to withdraw
 * Account can not go into negative
 */
@@ -93,7 +96,7 @@ void Operations::getAccountDetailsOperation(BankAccount& accountDetails) {
 }
 
 /**
-* Authenticate Bank account via surname and return bank account object
+* Authenticate Bank account via account number and password created and return bank account object
 */
 BankAccount Operations::authenticateBankAccount() {
 	string accountNumber = "";
