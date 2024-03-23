@@ -159,7 +159,7 @@ void Operations::registerAnAccountOperation() {
 	Utility::verifyUserInput();
 	bankAccount.setBirthMonth(birthMonth);
 
-	cout << "Please input your birth date: " << endl;
+	cout << "Please input your birth date (a value between 1-31): " << endl;
 	cin >> birthDate;
 	Utility::verifyUserInput();
 	bankAccount.setBirthDate(birthDate);
@@ -205,7 +205,7 @@ void Operations::updateAccountDetailsOperation() {
 	
 	//get account from account number
 	BankAccount userAccount= Utility::getBankDetailsFromFile(accountNumber);
-	cout << "Account found, Account in view: " << userAccount.getAccountNumber() << endl;;
+	cout << "Account found, Account in view: " << userAccount.getAccountNumber() << endl;
 
 	string newFistName;
 	//clear any character in the buffer before calling getline()
