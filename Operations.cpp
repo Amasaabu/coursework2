@@ -170,7 +170,7 @@ void Operations::registerAnAccountOperation() {
 	bankAccount.setBirthDate(birthDate);
 
 
-	cout << "Please select account type, (1) for savings (2) for current. If invalid type is entered account is assumed to be savings" << endl;
+	cout << "Please select account type, (1) for savings (2) for current. If invalid value is entered account is assumed to be savings" << endl;
 	cin >> accountType;
 	Utility::verifyUserInput();
 	if (accountType == 2) {

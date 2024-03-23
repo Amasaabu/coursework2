@@ -1,5 +1,4 @@
-﻿  Assignment2.cpp
-  BankAccount.cpp
+﻿  BankAccount.cpp
   Menu.cpp
 C:\Users\Amasa\Desktop\Dundee\SoftwareDev\Assignment2\code\Assignment2\Assignment2\Menu.cpp(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Amasa\Desktop\Dundee\SoftwareDev\Assignment2\code\Assignment2\Assignment2\Menu.cpp(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline

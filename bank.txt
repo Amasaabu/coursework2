@@ -1,7 +1,2 @@
-ACC-2436008 abu@fmmaiol.com GBP Amasa Abu 20 30 10 1990 SAVINGS abu
-ACC-2684431 dee@gmail. GBP Reee Heart 0 18 5 1990 CURRENT dee
-ACC-0601326 ree@gmail.com GBP wee Herwe 0 4 10 1990 SAVINGS ree
-ACC-0716314 amasa@gmail.com GBP Amasa Abubakar 0 4 10 1990 SAVINGS abu
-
-ACC-4276441 abubakar@gmail.com GBP Amasa Abubakar 0 21 8 1985 SAVINGS abu
+ACC-8462151 asa@gmail.com GBP Amasa Abub 0 12 1 2001 SAVINGS abu
 
