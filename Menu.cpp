@@ -14,7 +14,7 @@ void Menu::intialize() {
 		cout << ".........................." << endl;
 		cout << "2. Continue as an admin" << endl;
 		cout << ".........................." << endl;
-		cout << "3. Create a new Bank Account" << endl;
+		cout << "3. Register a new account" << endl;
 		cout << ".........................." << endl;
 		cout << "Enter any other key to exit application" << endl;
 		cin >> firstInput;
