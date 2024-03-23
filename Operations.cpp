@@ -12,7 +12,7 @@ using namespace std;
 */
 void Operations::addInterestToAllAccountsOperation() {
 	int confirmation = 0;
-	cout << "Are you sure you want to add interest to all account? Enter (1) if yes" << endl;;
+	cout << "Are you sure you want to add interest to all account? Enter (1) if yes" << endl;
 	cin >> confirmation;
 	Utility::verifyUserInput();
 	if (confirmation == 1) {

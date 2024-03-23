@@ -114,6 +114,8 @@ void Utility::updateAccountInFile(BankAccount updatedAcct) {
 
 void Utility::addInterestToAllAccount()
 {
+	cout << "Saving Interest Rate: " << interestRateForSavingsAccount << endl;
+	cout << "Current Interest Rate: " << interestRateForCurrent << endl;
 	string tempFileName = "update.txt";
 	//load all account
 	ifstream file;
