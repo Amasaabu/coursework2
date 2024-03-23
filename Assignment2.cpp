@@ -38,17 +38,17 @@ int main()
 	while (!menuExitedSuccessfully){
 		try {
 			Menu::intialize();
-			// if we get here it means all went well in menu initialization
+			// if we get here it means all went well in menu initialization, and we can safely exit the program
 			menuExitedSuccessfully = true;
 		}
 		catch (invalid_argument& e) {
 			cerr << e.what() << endl;
-			cout << "Exiting to main menu..." << endl;
+			cout << "Kindly try again" << endl;
 		}
 		catch (const std::exception& e)
 		{
 			cout << e.what() << endl;
-			cout << "An exception occured" << endl;
+			cout << "Kindly try again" << endl;
 		}
 	}
 

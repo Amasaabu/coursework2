@@ -4,14 +4,29 @@
 
 //CONSTRUCTORS
 BankAccount::BankAccount() {
-	this->accountBalance = 0;
-	//this->email = "";
-	//this->phoneNumber = "";
-	//this->surname = "";
-	//this->firstname = "";
+	this-> birthMonth = 0;
+	this-> birthDate = 0;
+	this-> birthYear = 0;
+
+	this-> accountNumber="";
+	this-> email="";
+	this-> phoneNumber="";
+	this-> surname="";
+	this-> firstname="";
+	this-> password="";
+	this-> accountBalance = 0;
+
+	this-> accountType="SAVINGS";
+
 }
 
+void BankAccount::setPassword(string& password) {
+	this->password = password;
+}
 
+string BankAccount::getPassword() {
+	return this->password;
+}
 void BankAccount::setBirthDate(int birthDate) {
 	if (birthDate < 1 || birthDate>31) {
 		throw invalid_argument("Invalid birth date entered, value must be between 1 and 31");
@@ -105,7 +120,7 @@ bool BankAccount::debitAccount(double amount) {
 	double temporaryNewBalance = this->accountBalance - amount;
 	if (temporaryNewBalance < 0)
 	{
-		throw  invalid_argument("Insufficient account balance to complete request");
+		cout<< "*****Insufficient account balance to complete request*****"<<endl;
 		return false;
 	}
 	this->accountBalance = temporaryNewBalance;
@@ -136,7 +151,7 @@ string BankAccount::getAccountType()
 istream& operator>>(istream& input, BankAccount& acct) {
 	input >> acct.accountNumber >> acct.email >> acct.phoneNumber
 		>> acct.surname >> acct.firstname >> acct.accountBalance >> acct.birthMonth
-		>> acct.birthDate >> acct.birthYear>>acct.accountType;
+		>> acct.birthDate >> acct.birthYear>>acct.accountType>>acct.password;
 	return input;
 }
 
@@ -144,7 +159,7 @@ ofstream& operator<<(ofstream& output, BankAccount& acct) {
 	output << acct.accountNumber << " " << acct.email << " "
 		<< acct.phoneNumber << " " << acct.surname << " " << acct.firstname << " "
 		<< acct.accountBalance << " " << acct.birthDate << " " << acct.birthMonth << " "
-		<< acct.birthYear << " " << acct.accountType << endl;;
+		<< acct.birthYear << " " << acct.accountType <<" " << acct.password << endl;;
 	return output;
 }
 

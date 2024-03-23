@@ -17,7 +17,7 @@ void Operations::addInterestToAllAccountsOperation() {
 		return;
 	}
 	else {
-		cout << "******Operation aborted!!! exiting to main menu******" << endl;
+		cout << "******Operation aborted!!!" << endl;
 		return;
 	}
 }
@@ -28,22 +28,15 @@ void Operations::addInterestToAllAccountsOperation() {
 * Request user to input amount to withdraw
 * Account can not go into negative
 */
-void Operations::withdrawCashOperation() {
-	string accountNumber = "";
-	cout << "Please anter account Number below: " << endl;
-	cin >> accountNumber;
-	Utility::verifyUserInput();
-	//get Account Details
-	cout << "Searching for account..." << endl;
-	BankAccount account = Utility::getBankDetailsFromFile(accountNumber);
-	cout << "Account Auth Succeeded!!" << endl;
-	cout << "Kindly enter amount you wish to WIthdraw: " << endl;
+void Operations::withdrawCashOperation(BankAccount& account) {
+	cout << "Kindly enter amount to withdraw below: " << endl;
 	double amount = 0;
 	cin >> amount;
 	Utility::verifyUserInput();
 	bool isSuccessful = account.debitAccount(amount);
 	if (!isSuccessful) {
-		throw invalid_argument("Operation Failed");
+		//operation failed for some other reason apart from insufficient balance
+		cout<< "Operation Failed"<<endl;
 		return;
 	}
 	Utility::updateAccountInFile(account);
@@ -60,16 +53,8 @@ void Operations::withdrawCashOperation() {
 * Request User to input account number and then validate this account
 * Request user to input amount to add
 */
-void Operations::addCashOperation() {
-	string accountNumber = "";
-	cout << "Please anter account Number below: " << endl;
-	cin >> accountNumber;
-	Utility::verifyUserInput();
-	//get Account Details
-	cout << "Searching for accouont..." << endl;
-	BankAccount account = Utility::getBankDetailsFromFile(accountNumber);
-	cout << "Account Auth Succeeded!" << endl;
-	cout << "Kindly enter amount you wish to credit your account with below " << endl;
+void Operations::addCashOperation(BankAccount& account) {
+	cout << "Kindly enter amount to add to account below: "<<endl;
 	double amount = 0;
 	cin >> amount;
 	Utility::verifyUserInput();
@@ -86,13 +71,8 @@ void Operations::addCashOperation() {
 * Get account details operation
 * Request User to input account number and then validate this account
 */
-void Operations::getAccountDetailsOperation() {
-	string accountNumber = "";
-	cout << "Input Account Number Below: " << endl;
-	cin >> accountNumber;
-	BankAccount accountDetails = Utility::getBankDetailsFromFile(accountNumber);
+void Operations::getAccountDetailsOperation(BankAccount& accountDetails) {
 	cout << "*******************" << endl;
-	cout << "Searching for Account Details..." << endl;
 	cout << "Account Details: " << endl;
 	cout << "" << endl;
 	cout << "Account Number: " << accountDetails.getAccountNumber() << endl;
@@ -109,10 +89,27 @@ void Operations::getAccountDetailsOperation() {
 	cout << ".........................." << endl;
 	cout << "Account Balance: " << accountDetails.getAccountBalance() << endl;
 	cout << "" << endl;
-
 	return;
+}
 
-
+/**
+* Authenticate Bank account via surname and return bank account object
+*/
+BankAccount Operations::authenticateBankAccount() {
+	string accountNumber = "";
+	cout << "Input Account Number Below: " << endl;
+	cin >> accountNumber;
+	BankAccount accountDetails = Utility::getBankDetailsFromFile(accountNumber);
+	cout << "*******************" << endl;
+	cout << "To authenticate, input account password below(CASE SENSITIVE). If you have forgotten your password kindly reach out to an admin to reset for you" << endl;
+	string password = "";
+	cin >> password;
+	Utility::verifyUserInput();
+	if (password != accountDetails.getPassword()) {
+		throw exception("Unable to authenticate account");
+	}
+	cout << "*****Authentication Suceeded****"<<endl;
+	return accountDetails;
 }
 
 /**
@@ -147,6 +144,11 @@ void Operations::registerAnAccountOperation() {
 	Utility::verifyUserInput();
 	bankAccount.setEmail(email);
 
+	cout << "Please create an account password you would like to use to authenticate: " << endl;
+	cin >> password;
+	Utility::verifyUserInput();
+	bankAccount.setPassword(password);
+
 	cout << "Please input your birth year (e.g 2002): " << endl;
 	cin >> birthYear;
 	Utility::verifyUserInput();
@@ -157,7 +159,7 @@ void Operations::registerAnAccountOperation() {
 	Utility::verifyUserInput();
 	bankAccount.setBirthMonth(birthMonth);
 
-	cout << "Please input your birth date: " << endl;
+	cout << "Please input your birth date (a value between 1-31): " << endl;
 	cin >> birthDate;
 	Utility::verifyUserInput();
 	bankAccount.setBirthDate(birthDate);
@@ -184,9 +186,9 @@ void Operations::registerAnAccountOperation() {
 		return;
 	}
 	//Display bank account details to customer
-	cout << "****Account Details***" << endl;
+	cout << "****Account created, see Account details, kindly select continue as a customer to sign in***" << endl;
 	cout << "1. Account Number: " << bankAccount.getAccountNumber() << endl;
-	cout << "1. Surname: " << bankAccount.getSurname() << endl;
+	cout << "2. Surname: " << bankAccount.getSurname() << endl;
 	cout << "****************" << endl;
 }
 
@@ -195,15 +197,15 @@ void Operations::registerAnAccountOperation() {
 */
 
 void Operations::updateAccountDetailsOperation() {
-	cout << "Kindly enter account number you wish to update details" << endl;
-	cout << "***Note: You can only modify firstname, email, phone number and account type" << endl;
+	cout << "***Note: You can only modify firstname, email, phone number and password" << endl;
+	cout << "Kindly enter account number for whish you wish to update details: " << endl;
 	string accountNumber;
 	cin >> accountNumber;
 	Utility::verifyUserInput();
 	
 	//get account from account number
 	BankAccount userAccount= Utility::getBankDetailsFromFile(accountNumber);
-	cout << "Account found, welcome: " << userAccount.getSurname() << endl;;
+	cout << "Account found, Account in view: " << userAccount.getAccountNumber() << endl;
 
 	string newFistName;
 	//clear any character in the buffer before calling getline()
@@ -221,10 +223,16 @@ void Operations::updateAccountDetailsOperation() {
 	userAccount.setEmail(newEmail);
 
 	string phoneNumber;
-	cout << "Enter new phone number you wish to make use of below or otherwise leave blank if you want it to remain as " << userAccount.getEmail() << endl;
+	cout << "Enter new phone number you wish to make use of below or otherwise leave blank if you want it to remain as " << userAccount.getPhoneNumber() << endl;
 	getline(cin, phoneNumber);
 	if (phoneNumber == "") phoneNumber = userAccount.getPhoneNumber();
 	userAccount.setPhoneNumber(phoneNumber);
+
+	string password;
+	cout << "Enter new password you would like to use below otherwise leave blank if you do not wish to change"<< endl;
+	getline(cin, password);
+	if (password == "") password = userAccount.getPassword();
+	userAccount.setPassword(password);
 
 	//Update
 	Utility::updateAccountInFile(userAccount);
