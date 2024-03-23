@@ -12,11 +12,13 @@ using namespace  std;
 
 /**
 * Name: Abubakar Amasa
-* Assignment 2
-* 
+* Assignment 2 
+* Brief Note:
+* 1. The app stores bank accounts in a bank.txt file
+* 2. Since this is a demo application, the admin can login with the password 'admin' 
+* 3. Account numbers are randomly generated.
 *
 */
-
 int main()
 {
 	srand((unsigned)time(NULL));

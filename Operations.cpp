@@ -196,9 +196,8 @@ void Operations::registerAnAccountOperation() {
 * Update account details
 * Operation can only be called by an admin
 */
-
 void Operations::updateAccountDetailsOperation() {
-	cout << "***Note: You can only modify firstname, email, phone number and password" << endl;
+	cout << "***Note: You can only modify firstname, email and password" << endl;
 	cout << "Kindly enter account number for whish you wish to update details: " << endl;
 	string accountNumber;
 	cin >> accountNumber;

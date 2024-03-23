@@ -5,6 +5,9 @@
 #include "Operations.h"
 using namespace std;
 
+/**
+* Method to intialize the main menu
+*/
 void Menu::intialize() {
 	while (true) {
 		string firstInput = "";
@@ -33,8 +36,11 @@ void Menu::intialize() {
 		}
 	}
 }
-
+/**
+* Method to initialize the customer menu, This is going to be called by the initialize method
+*/
 void Menu::initializeCustomerMenu() {
+	//Authenticate the customer before proceeding to give access to menu
 	BankAccount initializedAccount = Operations::authenticateBankAccount();
 	while (true) {
 		cout << "Customer Options: " << endl;
@@ -64,7 +70,9 @@ void Menu::initializeCustomerMenu() {
 	}
 
 }
-
+/**
+* Method to initialize the customer menu, This is going to be called by the initialize method
+*/
 void Menu::initializeAdminMenu() {
 	string password = "";
 	cout << "Kindly enter admin access password below: " << endl;

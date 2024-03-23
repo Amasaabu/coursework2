@@ -57,6 +57,7 @@ public:
 	void setAccountType(string);
 	string getAccountType();
 
+	//overide the >> and << operator so we can serialize and deserialize objects of class BankAccount easily
 	friend istream& operator>>(istream& input, BankAccount& acct);
 	friend ofstream& operator<<(ofstream& input, BankAccount& acct);
 

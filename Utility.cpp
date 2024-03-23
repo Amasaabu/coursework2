@@ -35,7 +35,9 @@ void Utility::verifyUserInput() {
 		throw std::invalid_argument("****Invalid input detected****");
 	}
 }
-
+/**
+* This saves a bank account to the file
+*/
 bool Utility::saveBankToFile(BankAccount acct) {
 	bool result = false;
 	ofstream file;
@@ -49,7 +51,9 @@ bool Utility::saveBankToFile(BankAccount acct) {
 	return result;
 }
 
-
+/**
+* Searches the bank.txt file for account number and returns details
+*/
 BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
 	ifstream file;
 	file.open(bankFile);
@@ -75,7 +79,9 @@ BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
 	return foundBankAccount;
 }
 
-
+/**
+* Update a singe bank account in file
+*/
 void Utility::updateAccountInFile(BankAccount updatedAcct) {
 	//account already available, we now try to update in file
 	string tempFile = "update.txt";
@@ -111,7 +117,11 @@ void Utility::updateAccountInFile(BankAccount updatedAcct) {
 	return;
 }
 
-
+/**
+* Add interest to all account, savings and current account rate are static
+* Method checks each account on file to see account type and adds interest appropriately
+* All account has an account type. As the class initializes the default account type to SAVINGS
+*/
 void Utility::addInterestToAllAccount()
 {
 	cout << "NOTE: " << endl;
@@ -170,7 +180,8 @@ bool Utility::checkInvalidNumInString(string &val) {
 }
 
 /*
-* Get All Account
+* Get All Account and return a vector
+* Since we can not tell the total amount of account we are going to have on file
 */
 vector<BankAccount> Utility::getAllAccount() {
 	ifstream file;
