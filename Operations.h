@@ -9,6 +9,7 @@ public:
 	static void withdrawCashOperation(BankAccount&);
 	static void addInterestToAllAccountsOperation();
 	static void updateAccountDetailsOperation();
+	static void showAllAccount();
 	static BankAccount authenticateBankAccount();
 };
 

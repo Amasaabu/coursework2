@@ -11,7 +11,7 @@ private:
 
 	string accountNumber="";
 	string email="";
-	string phoneNumber="";
+	string currency="";
 	string surname="";
 	string firstname="";
 	string password="";
@@ -26,8 +26,8 @@ public:
 	void setEmail(string& email);
 	string getEmail();
 
-	void setPhoneNumber(string& phoneNumber);
-	string getPhoneNumber();
+	void setCurrenecy(string& currency);
+	string getCurrency();
 
 	void setFirstName(string& firstName);
 	string getFirstName();

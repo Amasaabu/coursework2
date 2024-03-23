@@ -88,6 +88,8 @@ void Operations::getAccountDetailsOperation(BankAccount& accountDetails) {
 	cout << ".........................." << endl;
 	cout << "Account Type: " << accountDetails.getAccountType() << endl;
 	cout << ".........................." << endl;
+	cout << "Account Currency: " << accountDetails.getCurrency() << endl;
+	cout << ".........................." << endl;
 	cout << "Date of birth: " << accountDetails.getBirthDate() << "/" << accountDetails.getBirthMonth() << "/" << accountDetails.getBirthYear() << endl;
 	cout << ".........................." << endl;
 	cout << "Account Balance: " << accountDetails.getAccountBalance() << endl;
@@ -167,11 +169,6 @@ void Operations::registerAnAccountOperation() {
 	Utility::verifyUserInput();
 	bankAccount.setBirthDate(birthDate);
 
-	cout << "Please input your phone number, No country code" << endl;
-	cin >> phoneNumber;
-	bool isInvalid = Utility::checkInvalidNumInString(phoneNumber);
-	if (isInvalid) throw invalid_argument("Ensure phonenumber are all digit");
-	bankAccount.setPhoneNumber(phoneNumber);
 
 	cout << "Please select account type, (1) for savings (2) for current. If invalid type is entered account is assumed to be savings" << endl;
 	cin >> accountType;
@@ -197,6 +194,7 @@ void Operations::registerAnAccountOperation() {
 
 /**
 * Update account details
+* Operation can only be called by an admin
 */
 
 void Operations::updateAccountDetailsOperation() {
@@ -225,11 +223,7 @@ void Operations::updateAccountDetailsOperation() {
 	if (newEmail == "") newEmail = userAccount.getEmail();
 	userAccount.setEmail(newEmail);
 
-	string phoneNumber;
-	cout << "Enter new phone number you wish to make use of below or otherwise leave blank if you want it to remain as " << userAccount.getPhoneNumber() << endl;
-	getline(cin, phoneNumber);
-	if (phoneNumber == "") phoneNumber = userAccount.getPhoneNumber();
-	userAccount.setPhoneNumber(phoneNumber);
+
 
 	string password;
 	cout << "Enter new password you would like to use below otherwise leave blank if you do not wish to change"<< endl;
@@ -240,4 +234,19 @@ void Operations::updateAccountDetailsOperation() {
 	//Update
 	Utility::updateAccountInFile(userAccount);
 	cout << "Account updated successfully" << endl;
+}
+
+/**
+* List all account in bank.txt
+* Operation can only be called by an admin
+*/
+void Operations::showAllAccount() {
+	vector<BankAccount> accts = Utility::getAllAccount();
+	cout << "****Bank Account List****" << endl;
+	for (int i = 0; i<accts.size(); i++) {
+		cout << "............." << endl;
+		cout <<i+1<< ")Account Number: " << accts[i].getAccountNumber() << " "<<"Account Balance: "<< accts[i].getAccountBalance()<<endl;
+	}
+	cout << "********" << endl;
+	cout << "" << endl;
 }

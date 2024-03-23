@@ -71,7 +71,8 @@ void Menu::initializeAdminMenu() {
 	cout << "Admin Options: " << endl;
 	cout << "1. To add interest to all account" << endl;
 	cout << "2. Modify account details" << endl;
-	cout << "3. To exit to main menu" << endl;
+	cout << "3. To see all accounts" << endl;
+	cout << "4. To exit to main menu" << endl;
 	string secondInput = "";
 	cin >> secondInput;
 	if (secondInput == "1") {
@@ -81,6 +82,9 @@ void Menu::initializeAdminMenu() {
 		Operations::updateAccountDetailsOperation();
 	}
 	else if (secondInput == "3") {
+		Operations::showAllAccount();
+	}
+	else if (secondInput == "4") {
 		//cout << "Safely exiting Program..." << endl;
 		return;
 	}

@@ -1,1 +1,4 @@
-ACC-1715777 abubakar@gmail.com 08091121009 Amasa Abubakar 40 12 31 1990 SAVINGS star
+ACC-4478772 abubakar@gmail.com GBP Amasa Abubakar 0 23 2 1990 SAVINGS abu
+
+ACC-8512567 ade GBP Reem Ade 0 29 5 2001 CURRENT ade
+
