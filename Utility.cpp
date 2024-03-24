@@ -169,16 +169,6 @@ void Utility::addInterestToAllAccount()
 	return;
 }
 
-
-bool Utility::checkInvalidNumInString(string &val) {
-	for (char c : val) {
-		if (!isdigit(c)) {
-			return true;
-		}
-	}
-	return false;
-}
-
 /*
 * Get All Account and return a vector
 * Since we can not tell the total amount of account we are going to have on file
