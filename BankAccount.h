@@ -21,7 +21,7 @@ private:
 public:
 	BankAccount();
 	string getAccountNumber();
-	void setAccountNumber(string accountNumber);
+	void setAccountNumber(string& accountNumber);
 
 	void setEmail(string& email);
 	string getEmail();

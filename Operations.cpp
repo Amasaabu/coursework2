@@ -209,7 +209,8 @@ void Operations::registerAnAccountOperation() {
 	}
 
 	//generate account number
-	string accountNumber = Utility::generateRandom("ACC-");
+	string prefix = "ACC-";
+	string accountNumber = Utility::generateRandom(prefix);
 	bankAccount.setAccountNumber(accountNumber);
 	bool isOperationSuccessful = Utility::saveBankToFile(bankAccount);
 	if (!isOperationSuccessful) {

@@ -15,7 +15,7 @@ const string bankFile = "bank.txt";
 
 
 //Utility static method to generate random account number
-string Utility::generateRandom(string prefix) {
+string Utility::generateRandom(string& prefix) {
 	string random="";
 	for (int i = 0; i <= 6; i++) {
 		 random = random+ to_string((rand() % 9));
@@ -38,7 +38,7 @@ void Utility::verifyUserInput() {
 /**
 * This saves a bank account to the file
 */
-bool Utility::saveBankToFile(BankAccount acct) {
+bool Utility::saveBankToFile(BankAccount& acct) {
 	bool result = false;
 	ofstream file;
 	file.open(bankFile, ios::app);
@@ -54,7 +54,7 @@ bool Utility::saveBankToFile(BankAccount acct) {
 /**
 * Searches the bank.txt file for account number and returns details
 */
-BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
+BankAccount Utility::getBankDetailsFromFile(string& acctNumber) {
 	ifstream file;
 	file.open(bankFile);
 	BankAccount temp;
@@ -82,7 +82,7 @@ BankAccount Utility::getBankDetailsFromFile(string acctNumber) {
 /**
 * Update a singe bank account in file
 */
-void Utility::updateAccountInFile(BankAccount updatedAcct) {
+void Utility::updateAccountInFile(BankAccount& updatedAcct) {
 	//account already available, we now try to update in file
 	string tempFile = "update.txt";
 	ifstream inFile;

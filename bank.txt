@@ -1,2 +1,1 @@
-ACC-3455115 kid@gmail.com GBP Amasa Kid 94.5 12 4 1923 CURRENT kid
-ACC-4828214 heart@gmail.com GBP Albert Heart 99 3 10 2028 SAVINGS him
+ACC-0436732 abu@gmail.com GBP amasa abubakar 133.1 21 12 1990 SAVINGS abu

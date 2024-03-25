@@ -63,7 +63,7 @@ string BankAccount::getAccountNumber()
 	return this->accountNumber;
 }
 
-void BankAccount::setAccountNumber(string accountNumber)
+void BankAccount::setAccountNumber(string& accountNumber)
 {
 	this->accountNumber = accountNumber;
 }
