@@ -15,12 +15,17 @@ using namespace  std;
 * Assignment 2 
 * Brief Note:
 * 1. The app stores bank accounts in a bank.txt file
-* 2. Since this is a demo application, the admin can login with the password 'admin' 
-* 3. Account numbers are randomly generated.
+* 2. The bank.txt would be created once a bank account is created
+* 3. Once the program is started for the first time, kindly register a new customer first (by selecting the option from the main menu)
+* 4. To login as an admin the password to be entered is 'admin'
+* 5. Account numbers are randomly generated.
+* 6. I assumed creating an account is same as creating a new customer.
+* 7. For a customer to login kindly select continue as a customer
 *
 */
 int main()
 {
+	//initialize srand to generate random numbers
 	srand((unsigned)time(NULL));
 	bool menuExitedSuccessfully = false;
 	while (!menuExitedSuccessfully){

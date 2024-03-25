@@ -6,7 +6,7 @@
 #include "Utility.h"
 
 using namespace std;
-/*
+/**
 *This function handles adding interest to an account
 * This operation is to be completed by an admin
 */
@@ -30,12 +30,24 @@ void Operations::addInterestToAllAccountsOperation() {
 * Operation can only be completed by a validated user
 * Request user to input amount to withdraw
 * Account can not go into negative
+* Method would not allow negative amount
 */
 void Operations::withdrawCashOperation(BankAccount& account) {
 	cout << "Kindly enter amount to withdraw below: " << endl;
 	double amount = 0;
 	cin >> amount;
-	Utility::verifyUserInput();
+	if (amount < 0) {
+		cout << "Error: Amount to be withdrawn can not be less than 0" << endl;
+		return;
+	}
+	if (cin.fail() || cin.peek() != '\n') {
+		//clear error flag on the stream
+		cin.clear();
+		//clears the invalid input, size of input is max amount of stream and any new line in the stream.
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << ("****Invalid input detected****") << endl;
+		return;
+	}
 	bool isSuccessful = account.debitAccount(amount);
 	if (!isSuccessful) {
 		//operation failed for some other reason apart from insufficient balance
@@ -55,12 +67,24 @@ void Operations::withdrawCashOperation(BankAccount& account) {
 * Add cash operation
 * Request User to input account number and then validate this account
 * Request user to input amount to add
+* Only positive numbers would be accepted
 */
 void Operations::addCashOperation(BankAccount& account) {
 	cout << "Kindly enter amount to add to account below: "<<endl;
 	double amount = 0;
 	cin >> amount;
-	Utility::verifyUserInput();
+	if (amount < 0) {
+		cout << "Error: Amount to be added can not be less than 0"<<endl;
+		return;
+	}
+	if (cin.fail() || cin.peek() != '\n') {
+		//clear error flag on the stream
+		cin.clear();
+		//clears the invalid input, size of input is max amount of stream and any new line in the stream.
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << ("****Invalid input detected****") << endl;
+		return;
+	}
 	account.creditAccount(amount);
 	Utility::updateAccountInFile(account);
 	cout << "*******Cash added*********" << endl;
@@ -170,11 +194,18 @@ void Operations::registerAnAccountOperation() {
 	bankAccount.setBirthDate(birthDate);
 
 
-	cout << "Please select account type, (1) for savings (2) for current. If invalid value is entered account is assumed to be savings" << endl;
+	cout << "Please select account type, (1) for savings (2) for current" << endl;
 	cin >> accountType;
 	Utility::verifyUserInput();
 	if (accountType == 2) {
 		bankAccount.setAccountType("CURRENT");
+	}
+	else if (accountType == 1) {
+		bankAccount.setAccountType("SAVINGS");
+	}
+	else {
+		cout << "Error: Invalid account type, kindly enter 1 or 2"<<endl;
+		return;
 	}
 
 	//generate account number
@@ -188,6 +219,7 @@ void Operations::registerAnAccountOperation() {
 	//Display bank account details to customer
 	cout << "****Account created, see Account details, kindly select continue as a customer to sign in***" << endl;
 	cout << "1. Account Number: " << bankAccount.getAccountNumber() << endl;
+	cout << "1. Account Type: " << bankAccount.getAccountType() << endl;
 	cout << "2. Surname: " << bankAccount.getSurname() << endl;
 	cout << "****************" << endl;
 }
@@ -221,8 +253,6 @@ void Operations::updateAccountDetailsOperation() {
 	getline(cin, newEmail);
 	if (newEmail == "") newEmail = userAccount.getEmail();
 	userAccount.setEmail(newEmail);
-
-
 
 	string password;
 	cout << "Enter new password you would like to use below otherwise leave blank if you do not wish to change"<< endl;
