@@ -14,13 +14,15 @@ using namespace  std;
 * Name: Abubakar Amasa
 * Assignment 2 
 * Brief Note:
-* 1. The app stores bank accounts in a bank.txt file
-* 2. The bank.txt would be created once a bank account is created
+* 1. The app stores all bank accounts in a bank.txt file i.e an array of accounts in a single text file.
+* 2. If no bank.txt file exists initially,it would be created once a bank account is created
 * 3. Once the program is started for the first time, kindly register a new customer first (by selecting the option from the main menu)
-* 4. To login as an admin the password to be entered is 'admin'
-* 5. Account numbers are randomly generated.
-* 6. I assumed creating an account is same as creating a new customer.
-* 7. For a customer to login kindly select continue as a customer
+* 4. To login as an admin the password to be entered is 'admin'. (without the quote)
+* 5. An admin has the ability to view all account and modify some account details for customers (such as change password)
+* 6. An admin has the ability to add interest to all account on the bank.txt file
+* 7. Account numbers are randomly generated.
+* 8. I assumed creating an account is same as creating a new customer.
+* 9. For a customer to login kindly select continue as a customer
 *
 */
 int main()
